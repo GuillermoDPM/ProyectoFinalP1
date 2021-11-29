@@ -12,10 +12,12 @@ public class Controladora {
    private ArrayList<Proveedores> misProveedores;
    private ArrayList<OrdenCompra> misOrdenes;
    private int cantidadClientes;
+   private int cantidadOrdenes;
    private int cantidadMemoria;
    private int cantidadDiscos;
    private int cantidadMotherboard;
    private int cantidadProcesador;
+   private int generadorCodigoOrdenes;
    
    public static Controladora instanciaGlobal = null;
 
@@ -132,6 +134,28 @@ public ArrayList<OrdenCompra> getMisOrdenes() {
 
 public void setMisOrdenes(ArrayList<OrdenCompra> misOrdenes) {
 	this.misOrdenes = misOrdenes;
+}
+
+public int getCantidadOrdenes() {
+	return cantidadOrdenes;
+}
+
+public void setCantidadOrdenes(int cantidadOrdenes) {
+	this.cantidadOrdenes = cantidadOrdenes;
+}
+
+public int getGeneradorCodigoOrdenes() {
+	return generadorCodigoOrdenes;
+}
+
+public void setGeneradorCodigoOrdenes(int generadorCodigoOrdenes) {
+	this.generadorCodigoOrdenes = generadorCodigoOrdenes;
+}
+
+public void insertarOrdenCompra(OrdenCompra ordenCompra) {
+	misOrdenes.add(ordenCompra);
+	setCantidadOrdenes(getCantidadOrdenes()+1);
+	cantidadOrdenes++;
 }
 
 public void insertarClientes(Cliente cliente) {
