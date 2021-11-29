@@ -62,6 +62,9 @@ public class MenuPrincipal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Cliente");
 		mnNewMenu.add(mntmNewMenuItem_4);
+		
+		JMenu mnNewMenu_2 = new JMenu("Administrador");
+		menuBar.add(mnNewMenu_2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
