@@ -88,6 +88,7 @@ public String getTipoDePago() {
 public void setTipoDePago(String tipoDePago) {
 	this.tipoDePago = tipoDePago;
 }
+
  
  
 }
