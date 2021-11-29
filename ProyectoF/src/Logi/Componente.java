@@ -1,6 +1,7 @@
 package Logi;
 
 public class Componente {
+ private String codigoComponente;
  protected float precio;
  protected int cantidadMinima;
  protected int cantidadDisponible;
@@ -55,6 +56,15 @@ public Proveedores getProveedor() {
 public void setProveedor(Proveedores proveedor) {
 	this.proveedor = proveedor;
 }
+
+public String getCodigoComponente() {
+	return codigoComponente;
+}
+
+public void setCodigoComponente(String codigoComponente) {
+	this.codigoComponente = codigoComponente;
+}
+
  
 
  
