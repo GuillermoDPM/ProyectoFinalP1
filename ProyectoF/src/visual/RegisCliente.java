@@ -8,7 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import Logi.Cliente;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +30,8 @@ public class RegisCliente extends JDialog {
 	private JTextField txtTelefono;
 	private JTextField txtCedulaCliente;
 	private JTextField txtRNCliente;
+	private JRadioButton rbtnEmpresa;
+	private JRadioButton rbtnIndividuo;
 
 	/**
 	 * Launch the application.
@@ -91,7 +98,7 @@ public class RegisCliente extends JDialog {
 		lblNewLabel_3.setBounds(102, 162, 354, 16);
 		panel.add(lblNewLabel_3);
 		
-		JRadioButton rbtnIndividuo = new JRadioButton("Individuo");
+		rbtnIndividuo = new JRadioButton("Individuo");
 		rbtnIndividuo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rbtnIndividuo.setBounds(118, 198, 127, 25);
 		panel.add(rbtnIndividuo);
@@ -100,15 +107,32 @@ public class RegisCliente extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(rbtnIndividuo.isSelected()) {
+					rbtnEmpresa.setSelected(false);
+					txtCedulaCliente.setEditable(true);
+				}else {
+					txtCedulaCliente.setEditable(false);
 				}
 				
 			}
 		});
 		
-		JRadioButton rbtnEmpresa = new JRadioButton("Empresa");
+		rbtnEmpresa = new JRadioButton("Empresa");
 		rbtnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rbtnEmpresa.setBounds(249, 198, 127, 25);
 		panel.add(rbtnEmpresa);
+		rbtnEmpresa.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			 if(rbtnEmpresa.isSelected()) {
+				rbtnIndividuo.setSelected(false);
+				txtRNCliente.setEditable(true);
+			}else {
+				txtRNCliente.setEditable(false);
+			}
+				
+			}
+		});
 		
 		JLabel lblNewLabel_4 = new JLabel("Cedula:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -150,6 +174,14 @@ public class RegisCliente extends JDialog {
 			{
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.setActionCommand("OK");
+				btnRegistrar.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(), txtRNCliente.getText(), txtCedulaCliente.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));
+						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+					}
+				});
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
 			}

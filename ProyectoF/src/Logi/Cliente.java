@@ -9,8 +9,7 @@ public class Cliente {
  private float limiteCredito;
  private float cuentasPorCobrar;
  
-public Cliente(String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito,
-		float cuentasPorCobrar) {
+public Cliente(String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito) {
 	super();
 	this.nombre = nombre;
 	this.direccion = direccion;
@@ -18,7 +17,7 @@ public Cliente(String nombre, String direccion, String telefono, String rnc, Str
 	this.rnc = rnc;
 	this.cedula = cedula;
 	this.limiteCredito = limiteCredito;
-	this.cuentasPorCobrar = cuentasPorCobrar;
+	this.cuentasPorCobrar = 0;
 }
 
 public String getNombre() {
