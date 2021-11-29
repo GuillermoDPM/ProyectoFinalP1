@@ -8,6 +8,9 @@ public class Controladora {
    private ArrayList<Factura> misFacturas;
    private ArrayList<Cliente> misClientes;
    private ArrayList<Componente> misComponentes;
+   private ArrayList<Usuario> misUsuarios;
+   private ArrayList<Proveedores> misProveedores;
+   private ArrayList<OrdenCompra> misOrdenes;
    private int cantidadClientes;
    private int cantidadMemoria;
    private int cantidadDiscos;
@@ -23,10 +26,9 @@ private Controladora() {
 	this.misFacturas = new ArrayList<Factura>();
 	this.misClientes = new ArrayList<Cliente>();
 	this.setMisComponentes(new ArrayList<Componente>());
-	this.cantidadMemoria = 0;
-	this.cantidadDiscos = 0;
-	this.cantidadMotherboard = 0;
-	this.cantidadProcesador = 0;
+	this.misUsuarios = new ArrayList<Usuario>();
+	this.misProveedores = new ArrayList<Proveedores>();
+	this.misOrdenes = new ArrayList<OrdenCompra>();
 }
 
 public static Controladora getInstance() {
@@ -106,6 +108,30 @@ public int getCantidadProcesador() {
 
 public void setCantidadProcesador(int cantidadProcesador) {
 	this.cantidadProcesador = cantidadProcesador;
+}
+
+public ArrayList<Usuario> getMisUsuarios() {
+	return misUsuarios;
+}
+
+public void setMisUsuarios(ArrayList<Usuario> misUsuarios) {
+	this.misUsuarios = misUsuarios;
+}
+
+public ArrayList<Proveedores> getMisProveedores() {
+	return misProveedores;
+}
+
+public void setMisProveedores(ArrayList<Proveedores> misProveedores) {
+	this.misProveedores = misProveedores;
+}
+
+public ArrayList<OrdenCompra> getMisOrdenes() {
+	return misOrdenes;
+}
+
+public void setMisOrdenes(ArrayList<OrdenCompra> misOrdenes) {
+	this.misOrdenes = misOrdenes;
 }
 
 public void insertarClientes(Cliente cliente) {
