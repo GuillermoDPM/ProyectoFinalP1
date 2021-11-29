@@ -16,6 +16,7 @@ public Combos(String codigo, String nombre, float descuento, ArrayList<Component
 	this.misComponentes = new ArrayList<Componente>();
 	
 }
+
 public String getCodigo() {
 	return codigo;
 }
@@ -40,6 +41,7 @@ public ArrayList<Componente> getMisComponentes() {
 public void setMisComponentes(ArrayList<Componente> misComponentes) {
 	this.misComponentes = misComponentes;
 }
-  
+
+public void ensamblar(ArrayList<Componente> misComponentes) {};
   
 }

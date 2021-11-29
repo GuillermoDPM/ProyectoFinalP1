@@ -23,6 +23,10 @@ private Controladora() {
 	this.misFacturas = new ArrayList<Factura>();
 	this.misClientes = new ArrayList<Cliente>();
 	this.setMisComponentes(new ArrayList<Componente>());
+	this.cantidadMemoria = 0;
+	this.cantidadDiscos = 0;
+	this.cantidadMotherboard = 0;
+	this.cantidadProcesador = 0;
 }
 
 public static Controladora getInstance() {
