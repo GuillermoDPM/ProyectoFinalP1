@@ -166,6 +166,7 @@ public float preciototalfactura(String codigofactura)
 	Factura factura = Buscarcodigo(codigofactura);
 	preciototal = factura.getPrecioTotal();
 	return preciototal;
+	
 	}
 
 public Factura Buscarcodigo(String codigofactura) {
@@ -182,6 +183,7 @@ public Factura Buscarcodigo(String codigofactura) {
 	}
 	return factura;
 	}
-   
+
+
 	
 }
