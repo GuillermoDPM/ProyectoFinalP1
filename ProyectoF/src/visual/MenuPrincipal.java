@@ -2,6 +2,8 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -62,6 +64,14 @@ public class MenuPrincipal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Cliente");
 		mnNewMenu.add(mntmNewMenuItem_4);
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegisCliente regCliente = new RegisCliente();
+				regCliente.setVisible(true);	
+			}
+		});
 		
 		JMenu mnNewMenu_2 = new JMenu("Administrador");
 		menuBar.add(mnNewMenu_2);

@@ -18,6 +18,7 @@ public class Controladora {
    private int cantidadMotherboard;
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
+   private int borrame;
    
    public static Controladora instanciaGlobal = null;
 
