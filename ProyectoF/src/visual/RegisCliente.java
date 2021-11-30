@@ -51,8 +51,11 @@ public class RegisCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegisCliente() {
+		setModal(true);
+		setResizable(false);
 		setTitle("Registro Cliente");
 		setBounds(100, 100, 573, 490);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -174,6 +177,8 @@ public class RegisCliente extends JDialog {
 		panel.add(lblNewLabel_7);
 		
 		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		//txtCodigo.setText(arg0);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(77, 28, 371, 20);
 		panel.add(txtCodigo);
@@ -183,6 +188,10 @@ public class RegisCliente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnModificar = new JButton("Modificar");
+			btnModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
 			buttonPane.add(btnModificar);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
@@ -205,7 +214,11 @@ public class RegisCliente extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						int option = JOptionPane.showConfirmDialog(null, "¿Realmente desea cancelar el registro del cliente?","Confirmar",JOptionPane.INFORMATION_MESSAGE);
+						if(JOptionPane.YES_OPTION == option) {
+							dispose();
+						}
+						
 						
 					}
 				});
