@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import Logi.Cliente;
+import Logi.Controladora;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -178,7 +179,7 @@ public class RegisCliente extends JDialog {
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setEditable(false);
-		//txtCodigo.setText(arg0);
+		txtCodigo.setText("C-"+Controladora.getInstance().getGenCodigoCliente());
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(77, 28, 371, 20);
 		panel.add(txtCodigo);

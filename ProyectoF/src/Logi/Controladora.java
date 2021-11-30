@@ -19,7 +19,7 @@ public class Controladora {
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
    private int borrame;
-   
+   private int genCodigoCliente;
    public static Controladora instanciaGlobal = null;
 
    
@@ -32,6 +32,7 @@ private Controladora() {
 	this.misUsuarios = new ArrayList<Usuario>();
 	this.misProveedores = new ArrayList<Proveedores>();
 	this.misOrdenes = new ArrayList<OrdenCompra>();
+	genCodigoCliente = 1;
 }
 
 public static Controladora getInstance() {
@@ -238,6 +239,18 @@ public Factura Buscarcodigo(String codigofactura) {
 	}
 	return factura;
 	}
+
+public int getBorrame() {
+	return borrame;
+}
+
+public int getGenCodigoCliente() {
+	return genCodigoCliente;
+}
+
+public static Controladora getInstanciaGlobal() {
+	return instanciaGlobal;
+}
 
 
 	
