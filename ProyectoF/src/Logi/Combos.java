@@ -42,13 +42,13 @@ public void setMisComponentes(ArrayList<Componente> misComponentes) {
 	this.misComponentes = misComponentes;
 }
 
-	public float calcValCombo() {
+public float calcValCombo() {
 	float combo = 0;
 	combo = calcPrecioTotal() - calcPrecioTotal() * (descuento/100);
 	return combo;
 }
 
-	private float calcPrecioTotal() {
+ private float calcPrecioTotal() {
 	float total = 0;
 	for (Componente componente : misComponentes) {
 		if (componente != null) {
@@ -57,6 +57,4 @@ public void setMisComponentes(ArrayList<Componente> misComponentes) {
 	}
 	return total;
 }
-
-  
 }
