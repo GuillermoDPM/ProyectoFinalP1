@@ -1,6 +1,7 @@
 package Logi;
 
 public class Cliente {
+ private String codigoCliente;
  private String nombre;
  private String direccion;
  private String telefono;
@@ -11,6 +12,7 @@ public class Cliente {
  
 public Cliente(String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito) {
 	super();
+	this.setCodigoCliente(codigoCliente);
 	this.nombre = nombre;
 	this.direccion = direccion;
 	this.telefono = telefono;
@@ -74,6 +76,14 @@ public float getCuentasPorCobrar() {
 
 public void setCuentasPorCobrar(float cuentasPorCobrar) {
 	this.cuentasPorCobrar = cuentasPorCobrar;
+}
+
+public String getCodigoCliente() {
+	return codigoCliente;
+}
+
+public void setCodigoCliente(String codigoCliente) {
+	this.codigoCliente = codigoCliente;
 }
  
  
