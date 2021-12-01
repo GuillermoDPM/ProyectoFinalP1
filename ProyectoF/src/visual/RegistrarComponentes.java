@@ -28,7 +28,6 @@ public class RegistrarComponentes extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
@@ -56,7 +55,7 @@ public class RegistrarComponentes extends JFrame {
 		setResizable(false);
 		setTitle("Registro Componentes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 581, 891);
+		setBounds(100, 100, 653, 891);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +64,7 @@ public class RegistrarComponentes extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informacion general", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 13, 269, 170);
+		panel.setBounds(12, 13, 269, 124);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -73,11 +72,6 @@ public class RegistrarComponentes extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(12, 36, 56, 16);
 		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tipo:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(12, 117, 56, 16);
-		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Marca:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -94,14 +88,9 @@ public class RegistrarComponentes extends JFrame {
 		textField_1.setBounds(68, 76, 166, 22);
 		panel.add(textField_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "RAM", "Procesador", "Motherboard", "Disco"}));
-		comboBox.setBounds(68, 115, 166, 22);
-		panel.add(comboBox);
-		
 		JPanel JPMemoriaRam = new JPanel();
 		JPMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPMemoriaRam.setBounds(12, 285, 469, 75);
+		JPMemoriaRam.setBounds(12, 236, 469, 75);
 		contentPane.add(JPMemoriaRam);
 		JPMemoriaRam.setLayout(null);
 		
@@ -126,7 +115,7 @@ public class RegistrarComponentes extends JFrame {
 		
 		JPanel JPMicroprocesador = new JPanel();
 		JPMicroprocesador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Microprocesador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		JPMicroprocesador.setBounds(12, 395, 469, 114);
+		JPMicroprocesador.setBounds(12, 347, 469, 114);
 		contentPane.add(JPMicroprocesador);
 		JPMicroprocesador.setLayout(null);
 		
@@ -170,85 +159,71 @@ public class RegistrarComponentes extends JFrame {
 		
 		JPanel JPMotherboard = new JPanel();
 		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPMotherboard.setBounds(12, 520, 553, 114);
+		JPMotherboard.setBounds(12, 487, 553, 124);
 		contentPane.add(JPMotherboard);
 		JPMotherboard.setLayout(null);
 		
-		JLabel lblNewLabel_8 = new JLabel("Marca:");
-		lblNewLabel_8.setBounds(21, 23, 46, 14);
-		JPMotherboard.add(lblNewLabel_8);
-		
 		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setBounds(21, 45, 46, 14);
+		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblModelo.setBounds(89, 37, 60, 14);
 		JPMotherboard.add(lblModelo);
 		
 		JLabel lblTipoConector = new JLabel("Tipo Conector:");
-		lblTipoConector.setBounds(21, 67, 84, 14);
+		lblTipoConector.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoConector.setBounds(44, 64, 109, 14);
 		JPMotherboard.add(lblTipoConector);
 		
-		JLabel lblTipoMemoriaRam = new JLabel("Tipo Memoria Ram");
-		lblTipoMemoriaRam.setBounds(10, 92, 95, 14);
+		JLabel lblTipoMemoriaRam = new JLabel("Tipo Memoria Ram:");
+		lblTipoMemoriaRam.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoMemoriaRam.setBounds(12, 91, 137, 14);
 		JPMotherboard.add(lblTipoMemoriaRam);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(115, 20, 86, 20);
-		JPMotherboard.add(textField_3);
-		textField_3.setColumns(10);
-		
 		textField_4 = new JTextField();
-		textField_4.setBounds(115, 42, 86, 20);
+		textField_4.setBounds(157, 35, 315, 20);
 		JPMotherboard.add(textField_4);
 		textField_4.setColumns(10);
 		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "Sata", "Sata-2", "Sata-3"}));
-		comboBox_3.setBounds(112, 89, 124, 22);
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "DDR1", "DDR2", "DDR3", "DDR4"}));
+		comboBox_3.setBounds(157, 88, 124, 22);
 		JPMotherboard.add(comboBox_3);
 		
-		JRadioButton radioButton = new JRadioButton("Memoria Ram");
-		radioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton.setBounds(106, 63, 109, 23);
-		JPMotherboard.add(radioButton);
+		JRadioButton rdbtnIde = new JRadioButton("IDE");
+		rdbtnIde.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnIde.setBounds(133, 61, 86, 23);
+		JPMotherboard.add(rdbtnIde);
 		
-		JRadioButton radioButton_1 = new JRadioButton("Memoria Ram");
-		radioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton_1.setBounds(215, 63, 109, 23);
-		JPMotherboard.add(radioButton_1);
+		JRadioButton rdbtnSata = new JRadioButton("SATA");
+		rdbtnSata.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnSata.setBounds(193, 61, 109, 23);
+		JPMotherboard.add(rdbtnSata);
 		
-		JRadioButton radioButton_2 = new JRadioButton("Memoria Ram");
-		radioButton_2.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton_2.setBounds(331, 63, 109, 23);
-		JPMotherboard.add(radioButton_2);
+		JRadioButton rdbtnSata_1 = new JRadioButton("SATA-2");
+		rdbtnSata_1.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnSata_1.setBounds(281, 61, 109, 23);
+		JPMotherboard.add(rdbtnSata_1);
 		
-		JRadioButton radioButton_3 = new JRadioButton("Memoria Ram");
-		radioButton_3.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton_3.setBounds(431, 63, 109, 23);
-		JPMotherboard.add(radioButton_3);
+		JRadioButton rdbtnSata_2 = new JRadioButton("SATA-3");
+		rdbtnSata_2.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnSata_2.setBounds(383, 61, 109, 23);
+		JPMotherboard.add(rdbtnSata_2);
 		
 		JPanel JPComponentes = new JPanel();
 		JPComponentes.setBorder(new TitledBorder(null, "Componentes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPComponentes.setBounds(12, 194, 498, 72);
+		JPComponentes.setBounds(12, 163, 526, 60);
 		contentPane.add(JPComponentes);
 		JPComponentes.setLayout(null);
 		
 		JPanel JPDiscoDuro = new JPanel();
 		JPDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPDiscoDuro.setBounds(12, 634, 469, 114);
+		JPDiscoDuro.setBounds(12, 624, 469, 166);
 		contentPane.add(JPDiscoDuro);
 		JPDiscoDuro.setLayout(null);
 		
-		JLabel label = new JLabel("Marca:");
-		label.setBounds(10, 27, 33, 14);
-		JPDiscoDuro.add(label);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(48, 24, 86, 20);
-		textField_5.setColumns(10);
-		JPDiscoDuro.add(textField_5);
-		
-		JLabel label_1 = new JLabel("Modelo:");
-		label_1.setBounds(217, 30, 38, 14);
-		JPDiscoDuro.add(label_1);
+		JLabel lblModelo_1 = new JLabel("Modelo:");
+		lblModelo_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblModelo_1.setBounds(75, 29, 67, 14);
+		JPDiscoDuro.add(lblModelo_1);
 		
 		textField_6 = new JTextField();
 		textField_6.setBounds(260, 27, 86, 20);
@@ -256,37 +231,48 @@ public class RegistrarComponentes extends JFrame {
 		JPDiscoDuro.add(textField_6);
 		
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(259, 58, 117, 22);
+		spinner_2.setBounds(179, 89, 117, 22);
 		JPDiscoDuro.add(spinner_2);
 		
 		JLabel lblAlmacenamiento = new JLabel("Almacenamiento:");
-		lblAlmacenamiento.setBounds(169, 62, 86, 14);
+		lblAlmacenamiento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAlmacenamiento.setBounds(20, 92, 117, 14);
 		JPDiscoDuro.add(lblAlmacenamiento);
 		
 		JLabel lblTipoDeConexin = new JLabel("Tipo de Conexi\u00F3n:");
-		lblTipoDeConexin.setBounds(10, 62, 104, 14);
+		lblTipoDeConexin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoDeConexin.setBounds(10, 61, 132, 14);
 		JPDiscoDuro.add(lblTipoDeConexin);
 		JRadioButton rdbtnMemoriaRam = new JRadioButton("Memoria Ram");
-		rdbtnMemoriaRam.setBounds(6, 25, 109, 23);
+		rdbtnMemoriaRam.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnMemoriaRam.setBounds(6, 25, 119, 23);
 		rdbtnMemoriaRam.setHorizontalAlignment(SwingConstants.CENTER);
 		JPComponentes.add(rdbtnMemoriaRam);
 		
 		JRadioButton rdbtnMicroprocesador = new JRadioButton("Microprocesador");
+		rdbtnMicroprocesador.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rdbtnMicroprocesador.setHorizontalAlignment(SwingConstants.CENTER);
-		rdbtnMicroprocesador.setBounds(117, 25, 109, 23);
+		rdbtnMicroprocesador.setBounds(142, 26, 143, 23);
 		JPComponentes.add(rdbtnMicroprocesador);
 		
 		JRadioButton rdbtnMotherboard = new JRadioButton("Motherboard");
+		rdbtnMotherboard.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rdbtnMotherboard.setHorizontalAlignment(SwingConstants.CENTER);
-		rdbtnMotherboard.setBounds(241, 25, 109, 23);
+		rdbtnMotherboard.setBounds(289, 26, 126, 23);
 		JPComponentes.add(rdbtnMotherboard);
 		
 		
 		
 		JRadioButton rdbtnDiscoDuro = new JRadioButton("Disco Duro");
+		rdbtnDiscoDuro.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rdbtnDiscoDuro.setHorizontalAlignment(SwingConstants.CENTER);
-		rdbtnDiscoDuro.setBounds(352, 25, 109, 23);
+		rdbtnDiscoDuro.setBounds(414, 25, 109, 23);
 		JPComponentes.add(rdbtnDiscoDuro);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(520, 727, 86, 20);
+		contentPane.add(textField_5);
+		textField_5.setColumns(10);
 		
 		rdbtnDiscoDuro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
