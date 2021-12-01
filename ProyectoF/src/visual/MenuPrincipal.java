@@ -76,6 +76,9 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
+		JMenu mnNewMenu_3 = new JMenu("Facturaci\u00F3n");
+		menuBar.add(mnNewMenu_3);
+		
 		JMenu mnNewMenu_2 = new JMenu("Administrador");
 		menuBar.add(mnNewMenu_2);
 		
