@@ -153,5 +153,11 @@ public class RegistrarComponentes extends JFrame {
 		JButton btnNewButton = new JButton("Registrar");
 		btnNewButton.setBounds(324, 13, 97, 25);
 		contentPane.add(btnNewButton);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBounds(12, 433, 469, 114);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
 	}
 }

@@ -10,7 +10,7 @@ public class Cliente {
  private float limiteCredito;
  private float cuentasPorCobrar;
  
-public Cliente(String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito) {
+public Cliente(String codigoCliente, String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito) {
 	super();
 	this.setCodigoCliente(codigoCliente);
 	this.nombre = nombre;

@@ -34,6 +34,7 @@ public class RegisCliente extends JDialog {
 	private JRadioButton rbtnEmpresa;
 	private JRadioButton rbtnIndividuo;
 	private JTextField txtCodigo;
+	private JSpinner spnLimiteCredito;
 
 	/**
 	 * Launch the application.
@@ -72,6 +73,13 @@ public class RegisCliente extends JDialog {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(12, 64, 56, 16);
 		panel.add(lblNewLabel);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		txtCodigo.setText("C-"+Controladora.getInstance().getGenCodigoCliente());
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(77, 28, 371, 20);
+		panel.add(txtCodigo);
 		
 		txtNombreCliente = new JTextField();
 		txtNombreCliente.setBounds(77, 63, 371, 20);
@@ -163,7 +171,7 @@ public class RegisCliente extends JDialog {
 		txtRNCliente.setBounds(67, 305, 354, 20);
 		panel.add(txtRNCliente);
 		
-		JSpinner spnLimiteCredito = new JSpinner();
+		spnLimiteCredito = new JSpinner();
 		spnLimiteCredito.setBounds(135, 338, 110, 22);
 		panel.add(spnLimiteCredito);
 		
@@ -176,13 +184,7 @@ public class RegisCliente extends JDialog {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_7.setBounds(12, 30, 56, 16);
 		panel.add(lblNewLabel_7);
-		
-		txtCodigo = new JTextField();
-		txtCodigo.setEditable(false);
-		txtCodigo.setText("C-"+Controladora.getInstance().getGenCodigoCliente());
-		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(77, 28, 371, 20);
-		panel.add(txtCodigo);
+	
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -201,9 +203,12 @@ public class RegisCliente extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(), txtRNCliente.getText(), txtCedulaCliente.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));
+						Cliente aux = new Cliente(txtCodigo.getText(),txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(), txtRNCliente.getText(), txtCedulaCliente.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));
+						Controladora.getInstance().insertarClientes(aux);
 						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						clean();
 					}
+
 				});
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
@@ -226,5 +231,15 @@ public class RegisCliente extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	private void clean() {
+		txtNombreCliente.setText("");
+		txtDireccionCliente.setText("");
+		txtTelefono.setText("");
+		txtRNCliente.setText("");
+		txtCedulaCliente.setText("");
+		spnLimiteCredito.setValue(0);
+		txtCodigo.setText("C-"+Controladora.getInstance().getGenCodigoCliente());
 	}
 }

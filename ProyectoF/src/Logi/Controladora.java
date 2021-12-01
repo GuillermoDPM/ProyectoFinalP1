@@ -18,7 +18,6 @@ public class Controladora {
    private int cantidadMotherboard;
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
-   private int borrame;
    private int genCodigoCliente;
    public static Controladora instanciaGlobal = null;
 
@@ -32,7 +31,7 @@ private Controladora() {
 	this.misUsuarios = new ArrayList<Usuario>();
 	this.misProveedores = new ArrayList<Proveedores>();
 	this.misOrdenes = new ArrayList<OrdenCompra>();
-	genCodigoCliente = 1;
+	genCodigoCliente=1;
 }
 
 public static Controladora getInstance() {
@@ -154,6 +153,14 @@ public void setGeneradorCodigoOrdenes(int generadorCodigoOrdenes) {
 	this.generadorCodigoOrdenes = generadorCodigoOrdenes;
 }
 
+public int getGenCodigoCliente() {
+	return genCodigoCliente;
+}
+
+public void setGenCodigoCliente(int genCodigoCliente) {
+	this.genCodigoCliente = genCodigoCliente;
+}
+
 public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 	misOrdenes.add(ordenCompra);
 	setCantidadOrdenes(getCantidadOrdenes()+1);
@@ -163,6 +170,7 @@ public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 public void insertarClientes(Cliente cliente) {
 	misClientes.add(cliente);
 	setCantidadClientes(getCantidadClientes()+1);
+    setGenCodigoCliente(getGenCodigoCliente() + 1);
 }
 
 public Cliente buscarClienteNombre(String nombre) {
@@ -239,19 +247,5 @@ public Factura Buscarcodigo(String codigofactura) {
 	}
 	return factura;
 	}
-
-public int getBorrame() {
-	return borrame;
-}
-
-public int getGenCodigoCliente() {
-	return genCodigoCliente;
-}
-
-public static Controladora getInstanciaGlobal() {
-	return instanciaGlobal;
-}
-
-
 	
 }
