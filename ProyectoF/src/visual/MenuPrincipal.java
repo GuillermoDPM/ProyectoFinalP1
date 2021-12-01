@@ -52,20 +52,6 @@ public class MenuPrincipal extends JFrame {
 		JMenu mnNewMenu = new JMenu("Registro");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu("Componentes");
-		mnNewMenu.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Motherboard");
-		mnNewMenu_1.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Procesador");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Disco Duro");
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Ram");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Cliente");
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
@@ -74,6 +60,16 @@ public class MenuPrincipal extends JFrame {
 				regCliente.setVisible(true);
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Componentes");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					RegistrarComponentes regComponentes = new RegistrarComponentes();
+					regComponentes.setVisible(true);
+				
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
 		JMenu mnNewMenu_3 = new JMenu("Facturaci\u00F3n");
