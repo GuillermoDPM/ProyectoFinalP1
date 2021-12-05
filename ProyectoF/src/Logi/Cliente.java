@@ -1,23 +1,21 @@
 package Logi;
 
 public class Cliente {
- private String codigoCliente;
  private String nombre;
  private String direccion;
  private String telefono;
- private String rnc;
- private String cedula;
+ private String tipo;
+ private String identifiacion;
  private float limiteCredito;
  private float cuentasPorCobrar;
  
-public Cliente(String codigoCliente, String nombre, String direccion, String telefono, String rnc, String cedula, float limiteCredito) {
+public Cliente(String nombre, String direccion, String telefono, String tipo, String identificacion, float limiteCredito) {
 	super();
-	this.setCodigoCliente(codigoCliente);
 	this.nombre = nombre;
 	this.direccion = direccion;
 	this.telefono = telefono;
-	this.rnc = rnc;
-	this.cedula = cedula;
+	this.setTipo(tipo);
+	this.setIdentifiacion(identificacion);
 	this.limiteCredito = limiteCredito;
 	this.cuentasPorCobrar = 0;
 }
@@ -46,22 +44,6 @@ public void setTelefono(String telefono) {
 	this.telefono = telefono;
 }
 
-public String getRnc() {
-	return rnc;
-}
-
-public void setRnc(String rnc) {
-	this.rnc = rnc;
-}
-
-public String getCedula() {
-	return cedula;
-}
-
-public void setCedula(String cedula) {
-	this.cedula = cedula;
-}
-
 public float getLimiteCredito() {
 	return limiteCredito;
 }
@@ -78,12 +60,20 @@ public void setCuentasPorCobrar(float cuentasPorCobrar) {
 	this.cuentasPorCobrar = cuentasPorCobrar;
 }
 
-public String getCodigoCliente() {
-	return codigoCliente;
+public String getTipo() {
+	return tipo;
 }
 
-public void setCodigoCliente(String codigoCliente) {
-	this.codigoCliente = codigoCliente;
+public void setTipo(String tipo) {
+	this.tipo = tipo;
+}
+
+public String getIdentifiacion() {
+	return identifiacion;
+}
+
+public void setIdentifiacion(String identifiacion) {
+	this.identifiacion = identifiacion;
 }
  
  

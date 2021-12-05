@@ -2,7 +2,6 @@ package Logi;
 
 import java.util.ArrayList;
 
-
 public class Controladora {
    private ArrayList<Combos> misCombos;
    private ArrayList<Factura> misFacturas;
@@ -169,24 +168,46 @@ public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 
 public void insertarClientes(Cliente cliente) {
 	misClientes.add(cliente);
-	setCantidadClientes(getCantidadClientes()+1);
+	cantidadClientes++;
     setGenCodigoCliente(getGenCodigoCliente() + 1);
 }
 
-public Cliente buscarClienteNombre(String nombre) {
+public Cliente buscarCliente(String cedula) {
 	Cliente cliente = null;
 	boolean encontrado = false;
 	int indexBuscador=0;
 
 	while (!encontrado && indexBuscador<misClientes.size()) {
 
-		if(misClientes.get(indexBuscador).getNombre().equalsIgnoreCase(nombre)) {
+		if(misClientes.get(indexBuscador).getIdentifiacion().equalsIgnoreCase(cedula)) {
 			cliente=misClientes.get(indexBuscador);
 			encontrado = true;				
 		}
 		indexBuscador++;
 	}
 	return cliente;
+}
+
+public int buscarIndexCliente(String code) {
+	int cliente = -1;
+	int i = 0;
+	boolean encontrado = false;
+	while (!encontrado && i < cantidadClientes) {
+		if(misClientes.get(i).getIdentifiacion().equalsIgnoreCase(code)) {
+			encontrado = true;
+			cliente = i;
+		}
+		i++;
+	}
+	return cliente;
+}
+
+public void modificarCliente(Cliente updated) {
+	int index = buscarIndexCliente(updated.getIdentifiacion());
+	if(index!= -1){
+	   misClientes.set(index, updated);
+	}
+	
 }
 
 public void insertarComponentes(Componente componente) {
