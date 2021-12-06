@@ -390,7 +390,7 @@ public class RegistrarComponentes extends JFrame {
 				JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
 				clean();
 				deshabilitar();
-				conexiones.removeAll(conexiones);
+				conexiones.clear();
 			}
 		});
 		btnRegistrar.setFont(new Font("Times New Roman", Font.BOLD, 12));
