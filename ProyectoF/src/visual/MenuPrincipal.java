@@ -64,7 +64,7 @@ public class MenuPrincipal extends JFrame {
 					File fichero = new File("ZinioComputer.dat");
 					FileOutputStream fileOut = new FileOutputStream(fichero);
 					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-					objectOut.writeObject(Controladora.getInstance());
+					//objectOut.writeObject(Controladora.getInstance());
 					objectOut.close();
 					
 					} catch (Exception ex) {

@@ -342,6 +342,27 @@ public Combos buscarCombos(String codigo) {
 	return combo;
 }
 
+public int buscarIndexCombo(String codigoCombo) {
+	int combo = -1;
+	int i = 0;
+	boolean encontrado = false;
+	while (!encontrado && i < cantidadCombos) {
+		if(misCombos.get(i).getCodigo().equalsIgnoreCase(codigoCombo)) {
+			encontrado = true;
+			combo = i;
+		}
+		i++;
+	}
+	return combo;
+}
+
+public void modificarCombo(Combos updated) {
+	int index = buscarIndexComponente(updated.getCodigo());
+	if(index!= -1){
+	   misCombos.set(index, updated);
+	}
+}
+
 public float preciototalfactura(String codigofactura) 
 {
 	float preciototal = 0;

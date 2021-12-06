@@ -39,10 +39,9 @@ import javax.swing.JSpinner;
 public class RegCombos extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
 	private DefaultTableModel model;
 	private Object[] row;
-	private Componente selected=null;
+	private Componente selected;
 	private JTextField txtCodigoCombo;
 	private JTextField txtNombreCombo;
 	private JTextField txtCodigoArticulo;
@@ -51,11 +50,11 @@ public class RegCombos extends JDialog {
 	private JButton btnBuscar;
 	private JSpinner spnDescuentoCombo;
 	int contadorFila=0;
-	private Componente cmp = null;
 	private ArrayList<Componente>componentesTabla = new ArrayList<Componente>();
 	private JTextField txtSubtotal;
 	private JTextField txtDescuento;
 	private JTextField txtTotal;
+	private JTable table;
 
 
 	/**
@@ -78,7 +77,7 @@ public class RegCombos extends JDialog {
 		setModal(true);
 		setResizable(false);
 		setTitle("Combos");
-		setBounds(100, 100, 544, 651);
+		setBounds(100, 100, 540, 650);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -88,6 +87,18 @@ public class RegCombos extends JDialog {
 			panel.setBounds(12, 257, 498, 217);
 			contentPanel.add(panel);
 			panel.setLayout(new BorderLayout(0, 0));
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			panel.add(scrollPane, BorderLayout.CENTER);
+			
+			table = new JTable();
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			model = new DefaultTableModel();
+			String headers[] = {"Codigo","Cantidad","Marca","Modelo","Precio unitario"};
+			scrollPane.setViewportView(table);
+			model.setColumnIdentifiers(headers);
+			table.setModel(model);
 		}
 		{
 			JPanel panel = new JPanel();
@@ -149,11 +160,14 @@ public class RegCombos extends JDialog {
 								spnDescuentoCombo.setEnabled(true);
 								txtCodigoArticulo.setEditable(true);
 								spnCantidadArticulo.setEnabled(true);
+								btnAgregar.setEnabled(true);
 							}
 						}else {
 							txtNombreCombo.setText(aux.getNombre());
 							txtDescuento.setText(String.valueOf(aux.getDescuento()));
 							txtTotal.setText(String.valueOf(aux.getPrecioCombo()));
+							btnAgregar.setEnabled(true);
+							
 							cargarTabla();
 							
 						}
@@ -164,31 +178,6 @@ public class RegCombos extends JDialog {
 				panel.add(btnBuscar);
 			}
 		}
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 257, 498, 217);
-		contentPanel.add(scrollPane);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		table = new JTable();
-		model = new DefaultTableModel();
-		String headers[] = {"Codigo","Cantidad","Marca","Modelo","Precio unitario"};
-		model.setColumnIdentifiers(headers);
-		table.setModel(model);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				/*int seleccion = table.getSelectedRow();
-				int modelrow = table.convertRowIndexToModel(seleccion);
-				if(seleccion!=-1){
-					selected = Controladora.getInstance().buscarComponenteByCode((String)model.getValueAt(modelrow, 0));
-				}else{
-					selected = null;
-				}*/
-			}
-		});
-		scrollPane.setViewportView(table);
 		{
 			JLabel lblNewLabel_3 = new JLabel("Codigo:");
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -217,6 +206,7 @@ public class RegCombos extends JDialog {
 		}
 		{
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setEnabled(false);
 			btnAgregar.setBounds(378, 209, 97, 25);
 			contentPanel.add(btnAgregar);
 			{
@@ -258,6 +248,11 @@ public class RegCombos extends JDialog {
 				txtTotal.setBounds(332, 544, 116, 18);
 				contentPanel.add(txtTotal);
 			}
+			
+			JPanel panel = new JPanel();
+			panel.setBounds(12, 257, 498, 217);
+			contentPanel.add(panel);
+			panel.setLayout(new BorderLayout(0, 0));
 			btnAgregar.addActionListener(new ActionListener() {
 				
 				@Override
@@ -288,7 +283,7 @@ public class RegCombos extends JDialog {
 								row[3] = ((MemoriaRam) aux).getModelo();
 							}
 							model.addRow(row);
-							componentesTabla.add(selected);
+							componentesTabla.add(aux);
 							contadorFila++;
 							calcularPrecio();
 					}
@@ -309,9 +304,10 @@ public class RegCombos extends JDialog {
 					JButton btnEliminarElemento = new JButton("Remover elemento");
 					btnEliminarElemento.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							Componente aux = Controladora.getInstance().buscarComponenteByCode(txtCodigoArticulo.getText());
 							int seleccion = table.getSelectedRow();
                             model.removeRow(seleccion);
-                            componentesTabla.remove(selected);
+                            componentesTabla.remove(aux);
                             contadorFila--;
                             calcularPrecio();
 						}
@@ -328,17 +324,21 @@ public class RegCombos extends JDialog {
 						Combos aux = Controladora.getInstance().buscarCombos(txtCodigoCombo.getText());
 						
 						if(aux==null) {
-							Combos aux1 = new Combos(txtCodigoCombo.getText(),txtNombreCombo.getText(),Integer.valueOf(spnDescuentoCombo.getValue().toString()),componentesTabla,Integer.valueOf(txtTotal.getText()));
+							Combos aux1 = new Combos(txtCodigoCombo.getText(),txtNombreCombo.getText(),Integer.valueOf(spnDescuentoCombo.getValue().toString()),componentesTabla,Float.parseFloat(txtTotal.getText()));
 						    Controladora.getInstance().insertarCombos(aux1);
 							JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 
 						}else {
-							
+							Combos aux1 = new Combos(txtCodigoCombo.getText(),txtNombreCombo.getText(),Integer.valueOf(spnDescuentoCombo.getValue().toString()),componentesTabla,Float.parseFloat(txtTotal.getText()));
+                            Controladora.getInstance().modificarCombo(aux1);
+							JOptionPane.showMessageDialog(null, "Modificacion Satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+
 						}
-						
+						limpiar();
 						
 						
 					}
+
 				});
 			}
 			{
@@ -394,9 +394,18 @@ public class RegCombos extends JDialog {
 			if(comp instanceof MemoriaRam) {
 				row[2] = ((MemoriaRam) comp).getMarca();
 				row[3] = ((MemoriaRam) comp).getModelo();
-			};
+			}
 			model.addRow(row);
-		}
+		}		
 		
 	}
+	
+	private void limpiar() {
+		txtCodigoCombo.setText("");
+		txtNombreCombo.setText("");
+		spnDescuentoCombo.setValue(0);
+		txtCodigoArticulo.setText("");
+		spnCantidadArticulo.setValue(0);
+		table.removeAll();
+		}
 }
