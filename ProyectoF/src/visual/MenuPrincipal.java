@@ -72,8 +72,36 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Combos");
+		mnNewMenu.add(mntmNewMenuItem_3);
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegCombos regcombos = new RegCombos();
+				regcombos.setVisible(true);
+			}
+		});
+		
 		JMenu mnNewMenu_3 = new JMenu("Facturaci\u00F3n");
 		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturar");
+		mnNewMenu_3.add(mntmNewMenuItem_1);
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Facturacion facturacion = new Facturacion();
+				facturacion.setVisible(true);	
+			}
+		});
+		
+		JMenu mnNewMenu_1 = new JMenu("Orden de Compra");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
+		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenu mnNewMenu_2 = new JMenu("Administrador");
 		menuBar.add(mnNewMenu_2);

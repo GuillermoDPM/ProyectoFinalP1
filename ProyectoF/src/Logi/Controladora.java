@@ -13,6 +13,7 @@ public class Controladora {
    private int cantidadClientes;
    private int cantidadProveedores;
    private int componentesTotalidad;
+   private int cantidadCombos;
    private int cantidadOrdenes;
    private int cantidadMemoria;
    private int cantidadDiscos;
@@ -178,6 +179,14 @@ public void setComponentesTotalidad(int componentesTotalidad) {
 	this.componentesTotalidad = componentesTotalidad;
 }
 
+public int getCantidadCombos() {
+	return cantidadCombos;
+}
+
+public void setCantidadCombos(int cantidadCombos) {
+	this.cantidadCombos = cantidadCombos;
+}
+
 public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 	misOrdenes.add(ordenCompra);
 	setCantidadOrdenes(getCantidadOrdenes()+1);
@@ -306,6 +315,27 @@ public void modificarComponente(Componente updated) {
 	if(index!= -1){
 	   misComponentes.set(index, updated);
 	}
+}
+
+public void insertarCombos(Combos combo) {
+	misCombos.add(combo);
+	cantidadCombos++;
+}
+
+public Combos buscarCombos(String codigo) {
+	Combos combo = null;
+	boolean encontrado = false;
+	int indexBuscador=0;
+
+	while (!encontrado && indexBuscador<misCombos.size()) {
+
+		if(misCombos.get(indexBuscador).getCodigo().equalsIgnoreCase(codigo)) {
+			combo=misCombos.get(indexBuscador);
+			encontrado = true;				
+		}
+		indexBuscador++;
+	}
+	return combo;
 }
 
 public float preciototalfactura(String codigofactura) 
