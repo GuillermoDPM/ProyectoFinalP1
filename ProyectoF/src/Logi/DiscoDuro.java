@@ -3,34 +3,14 @@ package Logi;
 public class DiscoDuro extends Componente {
 	private static final long serialVersionUID = 5L;
 	
- private String marca;
- private String modelo;
  private String tipoConexion;
  private float almacenamiento;
  
-public DiscoDuro(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial, Proveedores proveedor,
-		String marca, String modelo, String tipoConexion, float almacenamiento) {
-	super(codigoComponente,precio, cantidadMinima, cantidadDisponible, serial, proveedor);
-	this.marca = marca;
-	this.modelo = modelo;
+public DiscoDuro(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial,String marca, String modelo, Proveedores proveedor,
+		 String tipoConexion, float almacenamiento) {
+	super(codigoComponente,precio, cantidadMinima, cantidadDisponible, serial,marca,modelo, proveedor);
 	this.tipoConexion = tipoConexion;
 	this.almacenamiento = almacenamiento;
-}
-
-public String getMarca() {
-	return marca;
-}
-
-public void setMarca(String marca) {
-	this.marca = marca;
-}
-
-public String getModelo() {
-	return modelo;
-}
-
-public void setModelo(String modelo) {
-	this.modelo = modelo;
 }
 
 public String getTipoConexion() {

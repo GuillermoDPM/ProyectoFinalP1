@@ -57,7 +57,7 @@ public class MenuPrincipal extends JFrame {
 				FileOutputStream empresa2;
 				ObjectOutputStream empresaWrite;
 				try {
-<<<<<<< HEAD
+
 					File fichero = new File("ZinioComputer.dat");
 					FileOutputStream fileOut = new FileOutputStream(fichero);
 					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -67,19 +67,17 @@ public class MenuPrincipal extends JFrame {
 					} catch (Exception ex) {
 					ex.printStackTrace();
 					}
-=======
-					empresa2 = new  FileOutputStream("ZinioComputer.dat");
+
+			/*		empresa2 = new  FileOutputStream("ZinioComputer.dat");
 					empresaWrite = new ObjectOutputStream(empresa2);
 					empresaWrite.writeObject(Controladora.getInstance());
-				} catch (FileNotFoundException e1) {
+				 catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
-				
->>>>>>> branch 'master' of https://github.com/GuillermoDPM/ProyectoFinalP1.git
+				}	*/
 			}
 		});
 		

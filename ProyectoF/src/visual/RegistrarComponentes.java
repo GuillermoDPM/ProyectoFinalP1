@@ -42,10 +42,7 @@ public class RegistrarComponentes extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtCodigo;
 	private JTextField txtMarca;
-	private JTextField txtModeloProcesador;
-	private JTextField txtModeloBoard;
 	private JTextField txtConexionDisco;
-	private JTextField txtModeloDisco;
 	private JRadioButton rdbtnMemoriaRam;
 	private JRadioButton rdbtnMicroprocesador;
 	private JRadioButton rdbtnMotherboard;
@@ -76,7 +73,8 @@ public class RegistrarComponentes extends JFrame {
 	private Componente ram;
   
 	private JComboBox cbxSocket;
-	private JTextField txtModeloRam;
+	private JLabel lblNewLabel_5;
+	private JTextField txtModelo;
 	/**
 	 * Launch the application.
 	 */
@@ -110,7 +108,7 @@ public class RegistrarComponentes extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Introduccion articulo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(12, 13, 349, 124);
+		panel.setBounds(12, 13, 360, 145);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -175,7 +173,7 @@ public class RegistrarComponentes extends JFrame {
 							rdbtnMemoriaRam.setSelected(false);
 							rdbtnMicroprocesador.setSelected(false);
 							rdbtnDiscoDuro.setSelected(false);
-							txtModeloBoard.setText("");
+							txtModelo.setText("");
 							cbxTipoRamBoard.setSelectedItem(null);
 							cbxSocket.setSelectedItem(null);
 							int i=0;
@@ -200,7 +198,7 @@ public class RegistrarComponentes extends JFrame {
 							rdbtnMicroprocesador.setSelected(false);
 							rdbtnMotherboard.setSelected(false);
 							txtMarca.setText(((DiscoDuro) aux).getMarca());
-							txtModeloDisco.setText(((DiscoDuro) aux).getModelo());
+							txtModelo.setText(((DiscoDuro) aux).getModelo());
 							spnAlmacenamientoDisco.setValue(((DiscoDuro) aux).getAlmacenamiento());
 						}
 						if(aux instanceof Microprocesador) {
@@ -208,7 +206,7 @@ public class RegistrarComponentes extends JFrame {
 							rdbtnMemoriaRam.setSelected(false);
 							rdbtnMotherboard.setSelected(false);
 							rdbtnDiscoDuro.setSelected(false);
-							txtModeloProcesador.setText(((Microprocesador) aux).getModelo());
+							txtModelo.setText(((Microprocesador) aux).getModelo());
 							spnVelocidadProcesador.setValue(((Microprocesador) aux).getVelocidad());
 							cbxConectorProcesador.setSelectedItem(((Microprocesador) aux).getTipoConector());
 						}
@@ -223,6 +221,17 @@ public class RegistrarComponentes extends JFrame {
 		});
 		btnBuscar.setBounds(240, 34, 97, 25);
 		panel.add(btnBuscar);
+		
+		lblNewLabel_5 = new JLabel("Modelo:");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_5.setBounds(12, 116, 56, 16);
+		panel.add(lblNewLabel_5);
+		
+		txtModelo = new JTextField();
+		txtModelo.setEditable(false);
+		txtModelo.setColumns(10);
+		txtModelo.setBounds(68, 111, 166, 22);
+		panel.add(txtModelo);
 		
 		JPanel JPMemoriaRam = new JPanel();
 		JPMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -251,30 +260,12 @@ public class RegistrarComponentes extends JFrame {
 		cbxTipoRam.setBounds(307, 66, 117, 22);
 		JPMemoriaRam.add(cbxTipoRam);
 		
-		JLabel label = new JLabel("Modelo:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label.setBounds(67, 35, 60, 14);
-		JPMemoriaRam.add(label);
-		
-		txtModeloRam = new JTextField();
-		txtModeloRam.setEditable(false);
-		txtModeloRam.setColumns(10);
-		txtModeloRam.setBounds(135, 33, 315, 20);
-		JPMemoriaRam.add(txtModeloRam);
-		
 		JPanel JPMotherboard = new JPanel();
 		JPMotherboard.setBounds(12, 249, 484, 136);
 		contentPane.add(JPMotherboard);
 		//JPMemoriaRam.add(JPMotherboard);  // PRIMER ERROR
 		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		JPMotherboard.setLayout(null);
-		
-		
-		
-		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblModelo.setBounds(89, 37, 60, 14);
-		JPMotherboard.add(lblModelo);
 		
 		JLabel lblTipoConector = new JLabel("Socket:");
 		lblTipoConector.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -285,12 +276,6 @@ public class RegistrarComponentes extends JFrame {
 		lblTipoMemoriaRam.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTipoMemoriaRam.setBounds(12, 91, 137, 14);
 		JPMotherboard.add(lblTipoMemoriaRam);
-		
-		txtModeloBoard = new JTextField();
-		txtModeloBoard.setEditable(false);
-		txtModeloBoard.setBounds(157, 35, 315, 20);
-		JPMotherboard.add(txtModeloBoard);
-		txtModeloBoard.setColumns(10);
 		
 		cbxTipoRamBoard = new JComboBox();
 		cbxTipoRamBoard.setEnabled(false);
@@ -337,24 +322,6 @@ public class RegistrarComponentes extends JFrame {
 		contentPane.add(JPMicroprocesador);
 		JPMicroprocesador.setLayout(null);
 		
-		/*JPanel JPMotherboard = new JPanel();
-		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPMotherboard.setBounds(0, 0, 484, 144);
-		JPMemoriaRam.add(JPMotherboard);  // PRIMER ERROR
-		
-		JPMotherboard.setLayout(null);*/
-		
-		JLabel lblNewLabel_5 = new JLabel("Modelo:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(23, 38, 57, 16);
-		JPMicroprocesador.add(lblNewLabel_5);
-		
-		txtModeloProcesador = new JTextField();
-		txtModeloProcesador.setEditable(false);
-		txtModeloProcesador.setBounds(75, 36, 382, 22);
-		JPMicroprocesador.add(txtModeloProcesador);
-		txtModeloProcesador.setColumns(10);
-		
 		JLabel lblNewLabel_6 = new JLabel("Conector:");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_6.setBounds(12, 78, 68, 16);
@@ -380,9 +347,10 @@ public class RegistrarComponentes extends JFrame {
 		btnRegistrar.setEnabled(false);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Componente componente = null;
+				Componente componente = Controladora.getInstance().buscarComponenteByCode(txtCodigo.getText());
 				Proveedores proveedor = null;
 				proveedor = Controladora.getInstance().buscarProveedor(txtProveedorComponentes.getText());
+				if(componente==null) {
 				if(rdbtnMotherboard.isSelected()) {
 					if(rdbtnIDE.isSelected()) {
 						conexiones.add(rdbtnIDE.getText());
@@ -396,20 +364,49 @@ public class RegistrarComponentes extends JFrame {
 					if(rdbtnSATA3.isSelected()) {
 						conexiones.add(rdbtnSATA3.getText());
 					}
-					componente = new Motherboard(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloBoard.getText(),cbxSocket.getSelectedItem().toString(),cbxTipoRamBoard.getSelectedItem().toString(),conexiones);
+					componente = new Motherboard(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxSocket.getSelectedItem().toString(),cbxTipoRamBoard.getSelectedItem().toString(),conexiones);
 				}
 				
 				if(rdbtnMicroprocesador.isSelected()){
-					componente = new Microprocesador(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloProcesador.getText(),cbxConectorProcesador.getSelectedItem().toString(),Integer.valueOf(spnVelocidadProcesador.getValue().toString()));
+					componente = new Microprocesador(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxConectorProcesador.getSelectedItem().toString(),Integer.valueOf(spnVelocidadProcesador.getValue().toString()));
 				}
 				if(rdbtnMemoriaRam.isSelected()) {
-					componente = new MemoriaRam(txtCodigo.getText(),Integer.valueOf(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloRam.getText(),Integer.valueOf(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
+					componente = new MemoriaRam(txtCodigo.getText(),Integer.valueOf(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,Integer.valueOf(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
 				}
 				if(rdbtnDiscoDuro.isSelected()) {
-					componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloDisco.getText(),txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
+					componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
 				}
 				Controladora.getInstance().insertarComponentes(componente);
 				JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					if(rdbtnMotherboard.isSelected()) {
+						if(rdbtnIDE.isSelected()) {
+							conexiones.add(rdbtnIDE.getText());
+						}
+						if(rdbtnSATA.isSelected()) {
+							conexiones.add(rdbtnSATA.getText());
+						}
+						if(rdbtnSATA2.isSelected()) {
+							conexiones.add(rdbtnSATA2.getText());
+						}
+						if(rdbtnSATA3.isSelected()) {
+							conexiones.add(rdbtnSATA3.getText());
+						}
+						componente = new Motherboard(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxSocket.getSelectedItem().toString(),cbxTipoRamBoard.getSelectedItem().toString(),conexiones);
+					}
+					
+					if(rdbtnMicroprocesador.isSelected()){
+						componente = new Microprocesador(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxConectorProcesador.getSelectedItem().toString(),Integer.valueOf(spnVelocidadProcesador.getValue().toString()));
+					}
+					if(rdbtnMemoriaRam.isSelected()) {
+						componente = new MemoriaRam(txtCodigo.getText(),Float.parseFloat(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,Float.parseFloat(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
+					}
+					if(rdbtnDiscoDuro.isSelected()) {
+						componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
+					}
+					Controladora.getInstance().modificarComponente(componente);
+					JOptionPane.showMessageDialog(null, "Modificacion exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
+				}
 				clean();
 				deshabilitar();
 				conexiones.clear();
@@ -421,7 +418,7 @@ public class RegistrarComponentes extends JFrame {
 		
 		JPanel JPComponentes = new JPanel();
 		JPComponentes.setBorder(new TitledBorder(null, "Componentes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPComponentes.setBounds(12, 163, 526, 60);
+		JPComponentes.setBounds(12, 176, 526, 60);
 		contentPane.add(JPComponentes);
 		JPComponentes.setLayout(null);
 		
@@ -430,17 +427,6 @@ public class RegistrarComponentes extends JFrame {
 		JPDiscoDuro.setBounds(12, 249, 484, 136);
 		contentPane.add(JPDiscoDuro);
 		JPDiscoDuro.setLayout(null);
-		
-		JLabel lblModelo_1 = new JLabel("Modelo:");
-		lblModelo_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblModelo_1.setBounds(75, 29, 67, 14);
-		JPDiscoDuro.add(lblModelo_1);
-		
-		txtModeloDisco = new JTextField();
-		txtModeloDisco.setEditable(false);
-		txtModeloDisco.setBounds(179, 28, 86, 20);
-		txtModeloDisco.setColumns(10);
-		JPDiscoDuro.add(txtModeloDisco);
 		
 		spnAlmacenamientoDisco = new JSpinner();
 		spnAlmacenamientoDisco.setEnabled(false);
@@ -714,10 +700,7 @@ public class RegistrarComponentes extends JFrame {
 	private void clean() {
 		txtCodigo.setText("");
 		txtMarca.setText("");
-		txtModeloBoard.setText("");
-		txtModeloDisco.setText("");
-		txtModeloProcesador.setText("");
-		txtModeloRam.setText("");
+		txtModelo.setText("");
 		txtSerial.setText("");
 		txtProveedorComponentes.setText("");
 		spnPrecio.setValue(0);
@@ -739,10 +722,7 @@ public class RegistrarComponentes extends JFrame {
 	private void habilitar() {
 		txtCodigo.setEditable(true);
 		txtMarca.setEditable(true);
-		txtModeloBoard.setEditable(true);
-		txtModeloDisco.setEditable(true);
-		txtModeloProcesador.setEditable(true);
-		txtModeloRam.setEditable(true);
+		txtModelo.setEditable(true);
 		txtSerial.setEditable(true);
 		txtProveedorComponentes.setEditable(true);
 		txtConexionDisco.setEditable(true);
@@ -769,10 +749,7 @@ public class RegistrarComponentes extends JFrame {
 	private void deshabilitar() {
 		txtCodigo.setEditable(true);
 		txtMarca.setEditable(false);
-		txtModeloBoard.setEditable(false);
-		txtModeloDisco.setEditable(false);
-		txtModeloProcesador.setEditable(false);
-		txtModeloRam.setEditable(false);
+		txtModelo.setEditable(false);
 		txtSerial.setEditable(false);
 		txtProveedorComponentes.setEditable(false);
 		spnPrecio.setEnabled(false);

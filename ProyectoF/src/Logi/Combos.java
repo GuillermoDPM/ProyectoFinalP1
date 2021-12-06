@@ -1,6 +1,7 @@
 package Logi;
 
 import java.util.ArrayList;
+
 import java.io.Serializable;
 
 public class Combos implements Serializable {
@@ -12,7 +13,7 @@ public class Combos implements Serializable {
   private float precioCombo;
   private ArrayList<Componente> misComponentes;
   
-public Combos(String codigo, String nombre, float descuento, ArrayList<Componente> misComponentes, float precioCombo) {
+public Combos(String codigo, String nombre, float descuento, float precioCombo) {
 	super();
 	this.codigo = codigo;
 	this.nombre = nombre;
@@ -52,6 +53,10 @@ public float getPrecioCombo() {
 
 public void setPrecioCombo(float precioCombo) {
 	this.precioCombo = precioCombo;
+}
+
+public void insertarcomponentes(Componente c) {
+	misComponentes.add(c);
 }
 
 public float calcValCombo() {

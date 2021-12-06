@@ -11,15 +11,20 @@ public class Componente implements Serializable {
  protected int cantidadMinima;
  protected int cantidadDisponible;
  protected String serial;
+ private String marca;
+ private String modelo;
  private Proveedores proveedor;
+ private int itemsCombo;
  
-public Componente(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial, Proveedores proveedor) {
+public Componente(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial,String marca, String modelo, Proveedores proveedor) {
 	super();
 	this.codigoComponente = codigoComponente;
 	this.precio = precio;
 	this.cantidadMinima = cantidadMinima;
 	this.cantidadDisponible = cantidadDisponible;
 	this.serial = serial;
+	this.setMarca(marca);
+	this.setModelo(modelo);
 	this.proveedor = proveedor;
 }
 
@@ -69,6 +74,30 @@ public String getCodigoComponente() {
 
 public void setCodigoComponente(String codigoComponente) {
 	this.codigoComponente = codigoComponente;
+}
+
+public int getItemsCombo() {
+	return itemsCombo;
+}
+
+public void setItemsCombo(int itemsCombo) {
+	this.itemsCombo = itemsCombo;
+}
+
+public String getMarca() {
+	return marca;
+}
+
+public void setMarca(String marca) {
+	this.marca = marca;
+}
+
+public String getModelo() {
+	return modelo;
+}
+
+public void setModelo(String modelo) {
+	this.modelo = modelo;
 }
 
  
