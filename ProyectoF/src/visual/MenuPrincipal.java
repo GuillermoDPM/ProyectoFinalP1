@@ -1,5 +1,6 @@
 package visual;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -7,12 +8,21 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logi.Controladora;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
@@ -37,6 +47,59 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		
+		 
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				 
+				 
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				try {
+					File fichero = new File("ZinioComputer.dat");
+					FileOutputStream fileOut = new FileOutputStream(fichero);
+					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+					objectOut.writeObject(Controladora.getInstance());
+					objectOut.close();
+					
+					} catch (Exception ex) {
+					ex.printStackTrace();
+					}
+			}
+			 
+			 @Override
+			public void windowClosed(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowIconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowDeiconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowActivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+
+			 @Override
+			public void windowDeactivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+			}
+			
+			
+			
+		});
 		setTitle("Zinio Computer");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
