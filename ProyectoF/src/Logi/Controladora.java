@@ -1,8 +1,12 @@
 package Logi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Controladora {
+public class Controladora implements Serializable {
+	
+	private static final long serialVersionUID = 4059652231878894539L;
+	
    private ArrayList<Combos> misCombos;
    private ArrayList<Factura> misFacturas;
    private ArrayList<Cliente> misClientes;
