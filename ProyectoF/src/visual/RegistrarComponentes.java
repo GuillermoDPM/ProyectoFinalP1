@@ -76,6 +76,7 @@ public class RegistrarComponentes extends JFrame {
 	private Componente ram;
   
 	private JComboBox cbxSocket;
+	private JTextField txtModeloRam;
 	/**
 	 * Launch the application.
 	 */
@@ -100,78 +101,12 @@ public class RegistrarComponentes extends JFrame {
 		setResizable(false);
 		setTitle("Componentes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 564, 641);
+		setBounds(100, 100, 572, 641);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel JPMotherboard = new JPanel();
-		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPMotherboard.setBounds(12, 249, 484, 144);
-		contentPane.add(JPMotherboard);
-		JPMotherboard.setLayout(null);
-		
-		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblModelo.setBounds(89, 37, 60, 14);
-		JPMotherboard.add(lblModelo);
-		
-		JLabel lblTipoConector = new JLabel("Socket:");
-		lblTipoConector.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTipoConector.setBounds(89, 64, 109, 14);
-		JPMotherboard.add(lblTipoConector);
-		
-		JLabel lblTipoMemoriaRam = new JLabel("Tipo Memoria Ram:");
-		lblTipoMemoriaRam.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTipoMemoriaRam.setBounds(12, 91, 137, 14);
-		JPMotherboard.add(lblTipoMemoriaRam);
-		
-		txtModeloBoard = new JTextField();
-		txtModeloBoard.setEditable(false);
-		txtModeloBoard.setBounds(157, 35, 315, 20);
-		JPMotherboard.add(txtModeloBoard);
-		txtModeloBoard.setColumns(10);
-		
-		cbxTipoRamBoard = new JComboBox();
-		cbxTipoRamBoard.setEnabled(false);
-		cbxTipoRamBoard.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "DDR1", "DDR2", "DDR3", "DDR4"}));
-		cbxTipoRamBoard.setBounds(157, 88, 124, 22);
-		JPMotherboard.add(cbxTipoRamBoard);
-		
-		JLabel lblNewLabel_12 = new JLabel("Conexion discos:");
-		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_12.setBounds(35, 118, 124, 16);
-		JPMotherboard.add(lblNewLabel_12);
-		
-		cbxSocket = new JComboBox();
-		cbxSocket.setEnabled(false);
-		cbxSocket.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "mPGA478", "479", "LGS775", "AMD"}));
-		cbxSocket.setBounds(157, 61, 124, 22);
-		JPMotherboard.add(cbxSocket);
-		
-		rdbtnIDE = new JRadioButton("IDE");
-		rdbtnIDE.setEnabled(false);
-		rdbtnIDE.setBounds(154, 115, 47, 25);
-		JPMotherboard.add(rdbtnIDE);
-		
-		rdbtnSATA = new JRadioButton("SATA");
-		rdbtnSATA.setEnabled(false);
-		rdbtnSATA.setBounds(209, 115, 73, 25);
-		JPMotherboard.add(rdbtnSATA);
-		
-		rdbtnSATA2 = new JRadioButton("SATA-2");
-		rdbtnSATA2.setEnabled(false);
-		rdbtnSATA2.setBounds(284, 115, 79, 25);
-		JPMotherboard.add(rdbtnSATA2);
-		
-		rdbtnSATA3 = new JRadioButton("SATA-3");
-		rdbtnSATA3.setEnabled(false);
-		rdbtnSATA3.setBounds(367, 115, 79, 25);
-		JPMotherboard.add(rdbtnSATA3);
-		// BORRAR
-		JPMotherboard.setVisible(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Introduccion articulo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -297,24 +232,101 @@ public class RegistrarComponentes extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("Capacidad (MB):");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_3.setBounds(12, 34, 117, 16);
+		lblNewLabel_3.setBounds(12, 66, 117, 16);
 		JPMemoriaRam.add(lblNewLabel_3);
 		
 		spnCapacidadRam = new JSpinner();
 		spnCapacidadRam.setEnabled(false);
-		spnCapacidadRam.setBounds(129, 32, 117, 22);
+		spnCapacidadRam.setBounds(129, 64, 117, 22);
 		JPMemoriaRam.add(spnCapacidadRam);
 		
 		JLabel lblNewLabel_4 = new JLabel("Tipo:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_4.setBounds(266, 36, 56, 16);
+		lblNewLabel_4.setBounds(266, 68, 56, 16);
 		JPMemoriaRam.add(lblNewLabel_4);
 		
 		cbxTipoRam = new JComboBox();
 		cbxTipoRam.setEnabled(false);
 		cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "DDR1", "DDR2", "DDR3", "DDR4"}));
-		cbxTipoRam.setBounds(307, 34, 117, 22);
+		cbxTipoRam.setBounds(307, 66, 117, 22);
 		JPMemoriaRam.add(cbxTipoRam);
+		
+		JLabel label = new JLabel("Modelo:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label.setBounds(67, 35, 60, 14);
+		JPMemoriaRam.add(label);
+		
+		txtModeloRam = new JTextField();
+		txtModeloRam.setEditable(false);
+		txtModeloRam.setColumns(10);
+		txtModeloRam.setBounds(135, 33, 315, 20);
+		JPMemoriaRam.add(txtModeloRam);
+		
+		JPanel JPMotherboard = new JPanel();
+		JPMotherboard.setBounds(0, 0, 484, 144);
+		JPMemoriaRam.add(JPMotherboard);
+		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPMotherboard.setLayout(null);
+		
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblModelo.setBounds(89, 37, 60, 14);
+		JPMotherboard.add(lblModelo);
+		
+		JLabel lblTipoConector = new JLabel("Socket:");
+		lblTipoConector.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoConector.setBounds(89, 64, 109, 14);
+		JPMotherboard.add(lblTipoConector);
+		
+		JLabel lblTipoMemoriaRam = new JLabel("Tipo Memoria Ram:");
+		lblTipoMemoriaRam.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoMemoriaRam.setBounds(12, 91, 137, 14);
+		JPMotherboard.add(lblTipoMemoriaRam);
+		
+		txtModeloBoard = new JTextField();
+		txtModeloBoard.setEditable(false);
+		txtModeloBoard.setBounds(157, 35, 315, 20);
+		JPMotherboard.add(txtModeloBoard);
+		txtModeloBoard.setColumns(10);
+		
+		cbxTipoRamBoard = new JComboBox();
+		cbxTipoRamBoard.setEnabled(false);
+		cbxTipoRamBoard.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "DDR1", "DDR2", "DDR3", "DDR4"}));
+		cbxTipoRamBoard.setBounds(157, 88, 124, 22);
+		JPMotherboard.add(cbxTipoRamBoard);
+		
+		JLabel lblNewLabel_12 = new JLabel("Conexion discos:");
+		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_12.setBounds(35, 118, 124, 16);
+		JPMotherboard.add(lblNewLabel_12);
+		
+		cbxSocket = new JComboBox();
+		cbxSocket.setEnabled(false);
+		cbxSocket.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "mPGA478", "479", "LGS775", "AMD"}));
+		cbxSocket.setBounds(157, 61, 124, 22);
+		JPMotherboard.add(cbxSocket);
+		
+		rdbtnIDE = new JRadioButton("IDE");
+		rdbtnIDE.setEnabled(false);
+		rdbtnIDE.setBounds(154, 115, 47, 25);
+		JPMotherboard.add(rdbtnIDE);
+		
+		rdbtnSATA = new JRadioButton("SATA");
+		rdbtnSATA.setEnabled(false);
+		rdbtnSATA.setBounds(209, 115, 73, 25);
+		JPMotherboard.add(rdbtnSATA);
+		
+		rdbtnSATA2 = new JRadioButton("SATA-2");
+		rdbtnSATA2.setEnabled(false);
+		rdbtnSATA2.setBounds(284, 115, 79, 25);
+		JPMotherboard.add(rdbtnSATA2);
+		
+		rdbtnSATA3 = new JRadioButton("SATA-3");
+		rdbtnSATA3.setEnabled(false);
+		rdbtnSATA3.setBounds(367, 115, 79, 25);
+		JPMotherboard.add(rdbtnSATA3);
+		// BORRAR
+		JPMotherboard.setVisible(false);
 		
 		JPanel JPMicroprocesador = new JPanel();
 		JPMicroprocesador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Microprocesador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -381,7 +393,7 @@ public class RegistrarComponentes extends JFrame {
 					componente = new Microprocesador(txtCodigo.getText(),(float) Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloProcesador.getText(),cbxConectorProcesador.getSelectedItem().toString(),Integer.valueOf(spnVelocidadProcesador.getValue().toString()));
 				}
 				if(rdbtnMemoriaRam.isSelected()) {
-					componente = new MemoriaRam(txtCodigo.getText(),Integer.valueOf(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),Integer.valueOf(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
+					componente = new MemoriaRam(txtCodigo.getText(),Integer.valueOf(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloRam.getText(),Integer.valueOf(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
 				}
 				if(rdbtnDiscoDuro.isSelected()) {
 					componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),proveedor,txtMarca.getText(),txtModeloDisco.getText(),txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
@@ -695,6 +707,7 @@ public class RegistrarComponentes extends JFrame {
 		txtModeloBoard.setText("");
 		txtModeloDisco.setText("");
 		txtModeloProcesador.setText("");
+		txtModeloRam.setText("");
 		txtSerial.setText("");
 		txtProveedorComponentes.setText("");
 		spnPrecio.setValue(0);
@@ -719,8 +732,10 @@ public class RegistrarComponentes extends JFrame {
 		txtModeloBoard.setEditable(true);
 		txtModeloDisco.setEditable(true);
 		txtModeloProcesador.setEditable(true);
+		txtModeloRam.setEditable(true);
 		txtSerial.setEditable(true);
 		txtProveedorComponentes.setEditable(true);
+		txtConexionDisco.setEditable(true);
 		spnPrecio.setEnabled(true);
 		spnAlmacenamientoDisco.setEnabled(true);
 		spnCantidadMinima.setEnabled(true);
@@ -747,6 +762,7 @@ public class RegistrarComponentes extends JFrame {
 		txtModeloBoard.setEditable(false);
 		txtModeloDisco.setEditable(false);
 		txtModeloProcesador.setEditable(false);
+		txtModeloRam.setEditable(false);
 		txtSerial.setEditable(false);
 		txtProveedorComponentes.setEditable(false);
 		spnPrecio.setEnabled(false);

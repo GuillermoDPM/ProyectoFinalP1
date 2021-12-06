@@ -6,15 +6,16 @@ public class Combos {
   private String codigo;
   private String nombre;
   private float descuento;
+  private float precioCombo;
   private ArrayList<Componente> misComponentes;
   
-public Combos(String codigo, String nombre, float descuento, ArrayList<Componente> misComponentes) {
+public Combos(String codigo, String nombre, float descuento, ArrayList<Componente> misComponentes, float precioCombo) {
 	super();
 	this.codigo = codigo;
 	this.nombre = nombre;
 	this.descuento = descuento;
 	this.misComponentes = new ArrayList<Componente>();
-	
+	this.precioCombo = precioCombo;
 }
 
 public String getCodigo() {
@@ -40,6 +41,14 @@ public ArrayList<Componente> getMisComponentes() {
 }
 public void setMisComponentes(ArrayList<Componente> misComponentes) {
 	this.misComponentes = misComponentes;
+}
+
+public float getPrecioCombo() {
+	return precioCombo;
+}
+
+public void setPrecioCombo(float precioCombo) {
+	this.precioCombo = precioCombo;
 }
 
 public float calcValCombo() {

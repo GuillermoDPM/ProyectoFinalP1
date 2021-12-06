@@ -9,7 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Logi.Cliente;
+import Logi.Combos;
 import Logi.Componente;
+import Logi.Controladora;
+import Logi.DiscoDuro;
+import Logi.MemoriaRam;
+import Logi.Microprocesador;
+import Logi.Motherboard;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,9 +24,14 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -30,10 +42,21 @@ public class RegCombos extends JDialog {
 	private JTable table;
 	private DefaultTableModel model;
 	private Object[] row;
-	private Componente selected;
+	private Componente selected=null;
 	private JTextField txtCodigoCombo;
 	private JTextField txtNombreCombo;
 	private JTextField txtCodigoArticulo;
+	private JSpinner spnCantidadArticulo;
+	private JButton btnAgregar;
+	private JButton btnBuscar;
+	private JSpinner spnDescuentoCombo;
+	int contadorFila=0;
+	private Componente cmp = null;
+	private ArrayList<Componente>componentesTabla = new ArrayList<Componente>();
+	private JTextField txtSubtotal;
+	private JTextField txtDescuento;
+	private JTextField txtTotal;
+
 
 	/**
 	 * Launch the application.
@@ -55,7 +78,7 @@ public class RegCombos extends JDialog {
 		setModal(true);
 		setResizable(false);
 		setTitle("Combos");
-		setBounds(100, 100, 544, 555);
+		setBounds(100, 100, 544, 651);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -65,14 +88,11 @@ public class RegCombos extends JDialog {
 			panel.setBounds(12, 257, 498, 217);
 			contentPanel.add(panel);
 			panel.setLayout(new BorderLayout(0, 0));
-			model = new DefaultTableModel();
-			String[] headers = {"Codigo","Cantidad","Precio unitario","Total articulos"};
-			model.setColumnIdentifiers(headers);
 		}
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Informacion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(12, 13, 498, 142);
+			panel.setBounds(12, 40, 498, 142);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
@@ -95,6 +115,7 @@ public class RegCombos extends JDialog {
 			}
 			{
 				txtNombreCombo = new JTextField();
+				txtNombreCombo.setEditable(false);
 				txtNombreCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtNombreCombo.setBounds(90, 65, 396, 20);
 				panel.add(txtNombreCombo);
@@ -107,13 +128,38 @@ public class RegCombos extends JDialog {
 				panel.add(lblNewLabel_2);
 			}
 			{
-				JSpinner spnDescuentoCombo = new JSpinner();
+				spnDescuentoCombo = new JSpinner();
+				spnDescuentoCombo.setEnabled(false);
 				spnDescuentoCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				spnDescuentoCombo.setBounds(91, 98, 79, 20);
 				panel.add(spnDescuentoCombo);
 			}
 			{
-				JButton btnBuscar = new JButton("Buscar");
+				btnBuscar = new JButton("Buscar");
+				btnBuscar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Combos aux = Controladora.getInstance().buscarCombos(txtCodigoCombo.getText());
+						
+						if(aux == null) {
+							int option = JOptionPane.showConfirmDialog(null, "El combo no existe, desea crearlo?", "Confirmar", JOptionPane.WARNING_MESSAGE);
+							if(JOptionPane.NO_OPTION == option){
+								dispose();
+							}else {
+								txtNombreCombo.setEditable(true);
+								spnDescuentoCombo.setEnabled(true);
+								txtCodigoArticulo.setEditable(true);
+								spnCantidadArticulo.setEnabled(true);
+							}
+						}else {
+							txtNombreCombo.setText(aux.getNombre());
+							txtDescuento.setText(String.valueOf(aux.getDescuento()));
+							txtTotal.setText(String.valueOf(aux.getPrecioCombo()));
+							cargarTabla();
+							
+						}
+					}
+
+				});
 				btnBuscar.setBounds(257, 30, 97, 25);
 				panel.add(btnBuscar);
 			}
@@ -126,10 +172,22 @@ public class RegCombos extends JDialog {
 		
 		table = new JTable();
 		model = new DefaultTableModel();
-		String headers[] = {"Codigo","Articulo","Informacion","Precio unitario"};
+		String headers[] = {"Codigo","Cantidad","Marca","Modelo","Precio unitario"};
 		model.setColumnIdentifiers(headers);
 		table.setModel(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				/*int seleccion = table.getSelectedRow();
+				int modelrow = table.convertRowIndexToModel(seleccion);
+				if(seleccion!=-1){
+					selected = Controladora.getInstance().buscarComponenteByCode((String)model.getValueAt(modelrow, 0));
+				}else{
+					selected = null;
+				}*/
+			}
+		});
 		scrollPane.setViewportView(table);
 		{
 			JLabel lblNewLabel_3 = new JLabel("Codigo:");
@@ -139,6 +197,7 @@ public class RegCombos extends JDialog {
 		}
 		{
 			txtCodigoArticulo = new JTextField();
+			txtCodigoArticulo.setEditable(false);
 			txtCodigoArticulo.setColumns(10);
 			txtCodigoArticulo.setBounds(63, 210, 131, 20);
 			contentPanel.add(txtCodigoArticulo);
@@ -150,15 +209,91 @@ public class RegCombos extends JDialog {
 			contentPanel.add(lblNewLabel_4);
 		}
 		{
-			JSpinner spnCantidadArticulo = new JSpinner();
+			spnCantidadArticulo = new JSpinner();
+			spnCantidadArticulo.setEnabled(false);
 			spnCantidadArticulo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			spnCantidadArticulo.setBounds(272, 210, 79, 20);
 			contentPanel.add(spnCantidadArticulo);
 		}
 		{
-			JButton btnAgregar = new JButton("Agregar");
+			btnAgregar = new JButton("Agregar");
 			btnAgregar.setBounds(378, 209, 97, 25);
 			contentPanel.add(btnAgregar);
+			{
+				JLabel lblNewLabel_5 = new JLabel("Subtotal:");
+				lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				lblNewLabel_5.setBounds(268, 487, 68, 16);
+				contentPanel.add(lblNewLabel_5);
+			}
+			{
+				JLabel lblNewLabel_6 = new JLabel("Descuento:");
+				lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				lblNewLabel_6.setBounds(253, 517, 83, 16);
+				contentPanel.add(lblNewLabel_6);
+			}
+			{
+				JLabel lblNewLabel_7 = new JLabel("Total:");
+				lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				lblNewLabel_7.setBounds(285, 546, 56, 16);
+				contentPanel.add(lblNewLabel_7);
+			}
+			{
+				txtSubtotal = new JTextField();
+				txtSubtotal.setEditable(false);
+				txtSubtotal.setBounds(332, 485, 116, 18);
+				contentPanel.add(txtSubtotal);
+				txtSubtotal.setColumns(10);
+			}
+			{
+				txtDescuento = new JTextField();
+				txtDescuento.setEditable(false);
+				txtDescuento.setColumns(10);
+				txtDescuento.setBounds(332, 516, 116, 18);
+				contentPanel.add(txtDescuento);
+			}
+			{
+				txtTotal = new JTextField();
+				txtTotal.setEditable(false);
+				txtTotal.setColumns(10);
+				txtTotal.setBounds(332, 544, 116, 18);
+				contentPanel.add(txtTotal);
+			}
+			btnAgregar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					model.setRowCount(contadorFila);
+					row = new Object[model.getColumnCount()];
+					Componente aux = Controladora.getInstance().buscarComponenteByCode(txtCodigoArticulo.getText());
+					
+					if(aux!=null) {
+						row[0] = aux.getCodigoComponente();
+						row[1] = spnCantidadArticulo.getValue().toString();
+						row[4] = aux.getPrecio();
+						
+							if(aux instanceof Motherboard) {
+								row[2] = ((Motherboard) aux).getMarca();
+								row[3] = ((Motherboard) aux).getModelo();
+							}
+							if(aux instanceof DiscoDuro) {
+								row[2] = ((DiscoDuro) aux).getMarca();
+								row[3] = ((DiscoDuro) aux).getModelo();
+							}
+							if(aux instanceof Microprocesador) {
+								row[2] = ((Microprocesador) aux).getMarca();
+								row[3] = ((Microprocesador) aux).getModelo();
+							}
+							if(aux instanceof MemoriaRam) {
+								row[2] = ((MemoriaRam) aux).getMarca();
+								row[3] = ((MemoriaRam) aux).getModelo();
+							}
+							model.addRow(row);
+							componentesTabla.add(selected);
+							contadorFila++;
+							calcularPrecio();
+					}
+				}
+			});
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -171,12 +306,40 @@ public class RegCombos extends JDialog {
 					}
 				});
 				{
-					JButton btnModificarCombo = new JButton("Modificar combo");
-					buttonPane.add(btnModificarCombo);
+					JButton btnEliminarElemento = new JButton("Remover elemento");
+					btnEliminarElemento.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							int seleccion = table.getSelectedRow();
+                            model.removeRow(seleccion);
+                            componentesTabla.remove(selected);
+                            contadorFila--;
+                            calcularPrecio();
+						}
+					});
+					buttonPane.add(btnEliminarElemento);
 				}
 				btnRegistrarCombo.setActionCommand("OK");
 				buttonPane.add(btnRegistrarCombo);
 				getRootPane().setDefaultButton(btnRegistrarCombo);
+				btnRegistrarCombo.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Combos aux = Controladora.getInstance().buscarCombos(txtCodigoCombo.getText());
+						
+						if(aux==null) {
+							Combos aux1 = new Combos(txtCodigoCombo.getText(),txtNombreCombo.getText(),Integer.valueOf(spnDescuentoCombo.getValue().toString()),componentesTabla,Integer.valueOf(txtTotal.getText()));
+						    Controladora.getInstance().insertarCombos(aux1);
+							JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+						}else {
+							
+						}
+						
+						
+						
+					}
+				});
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
@@ -192,5 +355,48 @@ public class RegCombos extends JDialog {
 				});
 			}
 		}
+	}
+	
+	private void calcularPrecio() {
+      float subtotal=0,descuento=0,total=0;
+      
+      for(int i=0;i<table.getRowCount();i++) {
+    	  subtotal = subtotal + (Float.parseFloat(model.getValueAt(i, 4).toString())*Float.parseFloat(model.getValueAt(i, 1).toString()));
+      }
+      descuento = subtotal * ((Float.parseFloat(spnDescuentoCombo.getValue().toString()))/100);
+      total = subtotal-descuento;
+      
+      txtSubtotal.setText(String.valueOf(subtotal));
+      txtDescuento.setText(String.valueOf(descuento));
+      txtTotal.setText(String.valueOf(total));	
+	}
+	
+	private void cargarTabla() {
+		model.setRowCount(0);
+		row = new Object[model.getColumnCount()];
+		for(Componente comp:componentesTabla) {
+			row[0] = comp.getCodigoComponente();
+			row[1] = comp.getCantidadDisponible();
+			row[4] = comp.getPrecio();
+			
+			if(comp instanceof Motherboard) {
+				row[2] = ((Motherboard) comp).getMarca();
+				row[3] = ((Motherboard) comp).getModelo();
+			}
+			if(comp instanceof DiscoDuro) {
+				row[2] = ((DiscoDuro) comp).getMarca();
+				row[3] = ((DiscoDuro) comp).getModelo();
+			}
+			if(comp instanceof Microprocesador) {
+				row[2] = ((Microprocesador) comp).getMarca();
+				row[3] = ((Microprocesador) comp).getModelo();
+			}
+			if(comp instanceof MemoriaRam) {
+				row[2] = ((MemoriaRam) comp).getMarca();
+				row[3] = ((MemoriaRam) comp).getModelo();
+			};
+			model.addRow(row);
+		}
+		
 	}
 }
