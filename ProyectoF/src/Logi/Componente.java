@@ -1,15 +1,16 @@
 package Logi;
 
 public class Componente {
- private String codigoComponente;
+ protected String codigoComponente;
  protected float precio;
  protected int cantidadMinima;
  protected int cantidadDisponible;
- protected int serial;
+ protected String serial;
  private Proveedores proveedor;
  
-public Componente(float precio, int cantidadMinima, int cantidadDisponible, int serial, Proveedores proveedor) {
+public Componente(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial, Proveedores proveedor) {
 	super();
+	this.codigoComponente = codigoComponente;
 	this.precio = precio;
 	this.cantidadMinima = cantidadMinima;
 	this.cantidadDisponible = cantidadDisponible;
@@ -41,11 +42,11 @@ public void setCantidadDisponible(int cantidadDisponible) {
 	this.cantidadDisponible = cantidadDisponible;
 }
 
-public int getSerial() {
+public String getSerial() {
 	return serial;
 }
 
-public void setSerial(int serial) {
+public void setSerial(String serial) {
 	this.serial = serial;
 }
 

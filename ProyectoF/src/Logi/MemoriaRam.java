@@ -5,9 +5,9 @@ public class MemoriaRam extends Componente {
   private float capacidadMemoria;
   private String tipoMemoria;
   
-public MemoriaRam(float precio, int cantidadMinima, int cantidadDisponible, int serial, Proveedores proveedor,
+public MemoriaRam(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial, Proveedores proveedor,
 		String marca, float capacidadMemoria, String tipoMemoria) {
-	super(precio, cantidadMinima, cantidadDisponible, serial, proveedor);
+	super(codigoComponente,precio, cantidadMinima, cantidadDisponible, serial, proveedor);
 	this.marca = marca;
 	this.capacidadMemoria = capacidadMemoria;
 	this.tipoMemoria = tipoMemoria;

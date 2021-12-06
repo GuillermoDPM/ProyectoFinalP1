@@ -9,14 +9,14 @@ public class Motherboard extends Componente {
  private String tipoRam;
  private ArrayList<String> misConexiones;
  
-public Motherboard(float precio, int cantidadMinima, int cantidadDisponible, int serial, Proveedores proveedor,
+public Motherboard(String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial, Proveedores proveedor,
 		String marca, String modelo, String tipoConector, String tipoRam, ArrayList<String> misConexiones) {
-	super(precio, cantidadMinima, cantidadDisponible, serial, proveedor);
+	super(codigoComponente,precio, cantidadMinima, cantidadDisponible, serial, proveedor);
 	this.marca = marca;
 	this.modelo = modelo;
 	this.tipoConector = tipoConector;
 	this.tipoRam = tipoRam;
-	this.misConexiones = misConexiones;
+	this.misConexiones = new ArrayList<String>();
 }
 
 public String getMarca() {

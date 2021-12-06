@@ -87,6 +87,8 @@ public class RegisCliente extends JDialog {
 				if(rbtnIndividuo.isSelected()) {
 					rbtnEmpresa.setSelected(false);
 					txtIdentificacion.setEditable(true);
+				}else {
+					rbtnEmpresa.setSelected(true);
 				}
 			
 			}
@@ -104,6 +106,8 @@ public class RegisCliente extends JDialog {
 			 if(rbtnEmpresa.isSelected()) {
 				rbtnIndividuo.setSelected(false);
 				txtIdentificacion.setEditable(true);
+			}else {
+				rbtnIndividuo.setSelected(true);
 			}
 				
 			}
@@ -198,6 +202,7 @@ public class RegisCliente extends JDialog {
 					txtIdentificacion.setEditable(false);
 					spnLimiteCredito.setEnabled(false);
 					spnLimiteCredito.setValue(aux.getLimiteCredito());
+					rbtnIndividuo.setSelected(true);
 					
 				}
 				}else{
@@ -230,6 +235,7 @@ public class RegisCliente extends JDialog {
 						txtIdentificacion.setEditable(false);
 						btnAtras.setEnabled(true);
 						spnLimiteCredito.setEnabled(false);
+						rbtnEmpresa.setSelected(true);
 						
 					}
 				}

@@ -11,6 +11,8 @@ public class Controladora {
    private ArrayList<Proveedores> misProveedores;
    private ArrayList<OrdenCompra> misOrdenes;
    private int cantidadClientes;
+   private int cantidadProveedores;
+   private int componentesTotalidad;
    private int cantidadOrdenes;
    private int cantidadMemoria;
    private int cantidadDiscos;
@@ -26,7 +28,7 @@ private Controladora() {
 	this.misCombos = new ArrayList<Combos>();
 	this.misFacturas = new ArrayList<Factura>();
 	this.misClientes = new ArrayList<Cliente>();
-	this.setMisComponentes(new ArrayList<Componente>());
+	this.misComponentes = new ArrayList<Componente>();
 	this.misUsuarios = new ArrayList<Usuario>();
 	this.misProveedores = new ArrayList<Proveedores>();
 	this.misOrdenes = new ArrayList<OrdenCompra>();
@@ -160,11 +162,49 @@ public void setGenCodigoCliente(int genCodigoCliente) {
 	this.genCodigoCliente = genCodigoCliente;
 }
 
+public int getCantidadProveedores() {
+	return cantidadProveedores;
+}
+
+public void setCantidadProveedores(int cantidadProveedores) {
+	this.cantidadProveedores = cantidadProveedores;
+}
+
+public int getComponentesTotalidad() {
+	return componentesTotalidad;
+}
+
+public void setComponentesTotalidad(int componentesTotalidad) {
+	this.componentesTotalidad = componentesTotalidad;
+}
+
 public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 	misOrdenes.add(ordenCompra);
 	setCantidadOrdenes(getCantidadOrdenes()+1);
 	cantidadOrdenes++;
 }
+
+public void insertarProveedor(Proveedores proveedor) {
+	misProveedores.add(proveedor);
+	setCantidadProveedores(getCantidadProveedores() + 1);
+}
+
+public Proveedores buscarProveedor(String rnc) {
+	Proveedores proveedor = null;
+	boolean encontrado = false;
+	int indexBuscador=0;
+
+	while (!encontrado && indexBuscador<misProveedores.size()) {
+
+		if(misProveedores.get(indexBuscador).getrnc().equalsIgnoreCase(rnc)) {
+			proveedor=misProveedores.get(indexBuscador);
+			encontrado = true;				
+		}
+		indexBuscador++;
+	}
+	return proveedor;
+}
+
 
 public void insertarClientes(Cliente cliente) {
 	misClientes.add(cliente);
@@ -227,15 +267,17 @@ public void insertarComponentes(Componente componente) {
 			setCantidadMotherboard(getCantidadMotherboard()+1);
 		}
 		
+		componentesTotalidad = getCantidadMemoria() + getCantidadDiscos() + getCantidadProcesador() + getCantidadMotherboard();
+		
 	}
 }
 
-public Componente buscarComponenteByCode(String codigoComponente) {
+public Componente buscarComponenteByCode(String codigo) {
 	Componente componente = null;
 	boolean encontrado = false;
 	int i = 0;
-	while (!encontrado && i <misComponentes.size()) {
-		if(misComponentes.get(i).getCodigoComponente().equalsIgnoreCase(codigoComponente))
+	while (!encontrado && i < misComponentes.size()) {
+		if(misComponentes.get(i).getCodigoComponente().equalsIgnoreCase(codigo))
 		{
 			componente = misComponentes.get(i);
 			encontrado = true;
@@ -244,6 +286,27 @@ public Componente buscarComponenteByCode(String codigoComponente) {
 	}
 	return componente;
 	} 
+
+public int buscarIndexComponente(String codigoComponente) {
+	int componente = -1;
+	int i = 0;
+	boolean encontrado = false;
+	while (!encontrado && i < componentesTotalidad) {
+		if(misComponentes.get(i).getCodigoComponente().equalsIgnoreCase(codigoComponente)) {
+			encontrado = true;
+			componente = i;
+		}
+		i++;
+	}
+	return componente;
+}
+
+public void modificarComponente(Componente updated) {
+	int index = buscarIndexComponente(updated.getCodigoComponente());
+	if(index!= -1){
+	   misComponentes.set(index, updated);
+	}
+}
 
 public float preciototalfactura(String codigofactura) 
 {
