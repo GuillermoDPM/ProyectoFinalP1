@@ -41,20 +41,20 @@ public class Login extends JFrame {
 				ObjectInputStream controladoraRead;
 				ObjectOutputStream controladoraWrite;
 				try {
-					controladora = new FileInputStream ("Tienda.dat");
+					controladora = new FileInputStream ("ZinioComputer.dat");
 					controladoraRead = new ObjectInputStream(controladora);
 					Controladora temp = (Controladora)controladoraRead.readObject();
-					//Controladora.setControl(temp);
+					Controladora.setInstanciaGlobal(temp);;
 					controladora.close();
 					controladoraRead.close();
 				} catch (FileNotFoundException e) {
 					try {
-						controladora2 = new  FileOutputStream("Tienda.dat");
+						controladora2 = new  FileOutputStream("ZinioComputer.dat");
 						controladoraWrite = new ObjectOutputStream(controladora2);
 						Usuario aux = new Usuario("Guillermo","Chalecito","849","Admin","GP","1234");
 						//String nombre, String direccion, String telefono, String login, String username, String password
 						
-						//Controladora.getInstance().insertarUsuario(aux);
+						Controladora.getInstance().getMisUsuarios().add(aux);
 						controladoraWrite.writeObject(Controladora.getInstance());
 						controladora2.close();
 						controladoraWrite.close();
@@ -110,6 +110,21 @@ public class Login extends JFrame {
 		contentPane.add(txtPassword);
 		
 		JButton btnIniciar = new JButton("Iniciar");
+		btnIniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pass= new String(txtPassword.getPassword());
+				for(int i=0; i<Controladora.getInstance().getMisUsuarios().size(); i++) {
+					if(Controladora.getInstance().getMisUsuarios().get(i).getLogin().equals(txtUsuario.getText()) && Controladora.getInstance().getMisUsuarios().get(i).getPassword().equals(pass)) {
+						
+						MenuPrincipal menu = new MenuPrincipal();
+						dispose(); 
+						menu.setVisible(true);
+					}
+					
+				}
+				
+			}
+		});
 		//btnIniciar.addActionListener(new ActionListener() {
 			/*public void actionPerformed(ActionEvent e) {
 				if(Controladora.getInstance().confirmLogin(txtUsuario.getText(), txtPassword.getText())== true){

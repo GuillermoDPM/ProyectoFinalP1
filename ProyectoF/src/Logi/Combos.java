@@ -1,8 +1,11 @@
 package Logi;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Combos {
+public class Combos implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
   private String codigo;
   private String nombre;
   private float descuento;

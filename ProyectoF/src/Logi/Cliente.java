@@ -1,6 +1,8 @@
 package Logi;
-
-public class Cliente {
+import java.io.Serializable;
+public class Cliente implements Serializable  {
+	
+	 private static final long serialVersionUID = 5L;
  private String nombre;
  private String direccion;
  private String telefono;
@@ -8,6 +10,8 @@ public class Cliente {
  private String identifiacion;
  private float limiteCredito;
  private float cuentasPorCobrar;
+ 
+ 
  
 public Cliente(String nombre, String direccion, String telefono, String tipo, String identificacion, float limiteCredito) {
 	super();

@@ -1,8 +1,11 @@
 package Logi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Factura {
+public class Factura implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
  private String codigo;
  private float precioTotal;
  private Usuario vendedor;

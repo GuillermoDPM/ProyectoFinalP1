@@ -1,6 +1,11 @@
 package Logi;
 
-public class Proveedores {
+import java.io.Serializable;
+
+public class Proveedores implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
+	
 	private String nombre;
 	private String rnc;
 	private String telefono;

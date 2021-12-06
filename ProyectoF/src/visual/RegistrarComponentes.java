@@ -263,10 +263,13 @@ public class RegistrarComponentes extends JFrame {
 		JPMemoriaRam.add(txtModeloRam);
 		
 		JPanel JPMotherboard = new JPanel();
-		JPMotherboard.setBounds(0, 0, 484, 144);
-		JPMemoriaRam.add(JPMotherboard);
+		JPMotherboard.setBounds(12, 249, 484, 136);
+		contentPane.add(JPMotherboard);
+		//JPMemoriaRam.add(JPMotherboard);  // PRIMER ERROR
 		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		JPMotherboard.setLayout(null);
+		
+		
 		
 		JLabel lblModelo = new JLabel("Modelo:");
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -333,6 +336,13 @@ public class RegistrarComponentes extends JFrame {
 		JPMicroprocesador.setBounds(12, 249, 484, 136);
 		contentPane.add(JPMicroprocesador);
 		JPMicroprocesador.setLayout(null);
+		
+		/*JPanel JPMotherboard = new JPanel();
+		JPMotherboard.setBorder(new TitledBorder(null, "Motherboard", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPMotherboard.setBounds(0, 0, 484, 144);
+		JPMemoriaRam.add(JPMotherboard);  // PRIMER ERROR
+		
+		JPMotherboard.setLayout(null);*/
 		
 		JLabel lblNewLabel_5 = new JLabel("Modelo:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -689,13 +699,13 @@ public class RegistrarComponentes extends JFrame {
 		
 		rdbtnMemoriaRam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*JPMotherboard.setVisible(false);
+				JPMotherboard.setVisible(false);
 				JPMicroprocesador.setVisible(false);
 				JPMemoriaRam.setVisible(true);
 				JPDiscoDuro.setVisible(false);
 				rdbtnDiscoDuro.setSelected(false);
 				rdbtnMicroprocesador.setSelected(false);
-				rdbtnMotherboard.setSelected(false);*/
+				rdbtnMotherboard.setSelected(false);
 			}
 		});
 		
