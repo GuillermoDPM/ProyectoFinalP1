@@ -20,8 +20,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 public class MenuPrincipal extends JFrame {
 
@@ -49,18 +51,13 @@ public class MenuPrincipal extends JFrame {
 	public MenuPrincipal() {
 		
 		 
-		
 		addWindowListener(new WindowAdapter() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {
-				 
-				 
-			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				
+				FileOutputStream empresa2;
+				ObjectOutputStream empresaWrite;
 				try {
+<<<<<<< HEAD
 					File fichero = new File("ZinioComputer.dat");
 					FileOutputStream fileOut = new FileOutputStream(fichero);
 					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -70,36 +67,22 @@ public class MenuPrincipal extends JFrame {
 					} catch (Exception ex) {
 					ex.printStackTrace();
 					}
+=======
+					empresa2 = new  FileOutputStream("ZinioComputer.dat");
+					empresaWrite = new ObjectOutputStream(empresa2);
+					empresaWrite.writeObject(Controladora.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+>>>>>>> branch 'master' of https://github.com/GuillermoDPM/ProyectoFinalP1.git
 			}
-			 
-			 @Override
-			public void windowClosed(WindowEvent e) {
-			// TODO Auto-generated method stub
-			}
-
-			 @Override
-			public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			}
-
-			 @Override
-			public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			}
-
-			 @Override
-			public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			}
-
-			 @Override
-			public void windowDeactivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			}
-			
-			
-			
 		});
+		
 		setTitle("Zinio Computer");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

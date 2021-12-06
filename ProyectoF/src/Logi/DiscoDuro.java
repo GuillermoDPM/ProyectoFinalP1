@@ -1,6 +1,8 @@
 package Logi;
 
 public class DiscoDuro extends Componente {
+	private static final long serialVersionUID = 5L;
+	
  private String marca;
  private String modelo;
  private String tipoConexion;

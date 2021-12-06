@@ -1,6 +1,11 @@
 package Logi;
 
-public class Componente {
+import java.io.Serializable;
+
+public class Componente implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
+	
  protected String codigoComponente;
  protected float precio;
  protected int cantidadMinima;

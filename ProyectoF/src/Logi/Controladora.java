@@ -25,6 +25,7 @@ public class Controladora implements Serializable {
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
    private int genCodigoCliente;
+   
    public static Controladora instanciaGlobal = null;
 
    
@@ -386,5 +387,11 @@ public Factura Buscarcodigo(String codigofactura) {
 	}
 	return factura;
 	}
+
+public static void setInstanciaGlobal(Controladora instanciaGlobal) {
+	Controladora.instanciaGlobal = instanciaGlobal;
+}
+
+
 	
 }

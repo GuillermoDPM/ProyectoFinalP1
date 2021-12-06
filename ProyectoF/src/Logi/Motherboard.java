@@ -3,6 +3,9 @@ package Logi;
 import java.util.ArrayList;
 
 public class Motherboard extends Componente {
+	
+	private static final long serialVersionUID = 5L;
+	
  private String marca;
  private String modelo;
  private String tipoConector;
