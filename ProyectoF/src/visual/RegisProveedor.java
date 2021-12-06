@@ -121,9 +121,9 @@ public class RegisProveedor extends JDialog {
 			JButton btnModificar = new JButton("Modificar");
 			btnModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					
 				}
 			});
-			buttonPane.add(btnModificar);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.setActionCommand("OK");
@@ -139,6 +139,7 @@ public class RegisProveedor extends JDialog {
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
+			buttonPane.add(btnModificar);
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
