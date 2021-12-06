@@ -1,55 +1,128 @@
 package visual;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.EventQueue;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Login extends JDialog {
+import Logi.Usuario;
+import Logi.Controladora;
 
-	private final JPanel contentPanel = new JPanel();
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Login extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtUsuario;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			Login dialog = new Login();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				FileInputStream controladora;
+				FileOutputStream controladora2;
+				ObjectInputStream controladoraRead;
+				ObjectOutputStream controladoraWrite;
+				try {
+					controladora = new FileInputStream ("Tienda.dat");
+					controladoraRead = new ObjectInputStream(controladora);
+					Controladora temp = (Controladora)controladoraRead.readObject();
+					//Controladora.setControl(temp);
+					controladora.close();
+					controladoraRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						controladora2 = new  FileOutputStream("Tienda.dat");
+						controladoraWrite = new ObjectOutputStream(controladora2);
+						Usuario aux = new Usuario("Guillermo","Chalecito","849","Admin","GP","1234");
+						//String nombre, String direccion, String telefono, String login, String username, String password
+						
+						//Controladora.getInstance().insertarUsuario(aux);
+						controladoraWrite.writeObject(Controladora.getInstance());
+						controladora2.close();
+						controladoraWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create the frame.
 	 */
 	public Login() {
+		setTitle("Login");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		lblUsuario.setBounds(133, 86, 66, 15);
+		contentPane.add(lblUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setBounds(133, 175, 91, 15);
+		contentPane.add(lblContrasea);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(131, 82, 165, 23);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(131, 171, 165, 23);
+		contentPane.add(txtPassword);
+		
+		JButton btnIniciar = new JButton("Iniciar");
+		//btnIniciar.addActionListener(new ActionListener() {
+			/*public void actionPerformed(ActionEvent e) {
+				if(Controladora.getInstance().confirmLogin(txtUsuario.getText(), txtPassword.getText())== true){
+					MenuPrincipal frame = new MenuPrincipal();
+					frame.setVisible(true);
+					dispose();
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta" );
+				}
+			}*/
+		//});
+		btnIniciar.setBounds(164, 205, 89, 23);
+		contentPane.add(btnIniciar);
 	}
-
 }
