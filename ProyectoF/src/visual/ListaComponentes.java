@@ -14,6 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
+import Logi.Combos;
+import Logi.Componente;
+import Logi.Controladora;
+import Logi.DiscoDuro;
+import Logi.Proveedores;
+import Logi.Combos;
+import Logi.DiscoDuro;
+import Logi.MemoriaRam;
+import Logi.Microprocesador;
+import Logi.Motherboard;
+
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
@@ -31,7 +43,13 @@ public class ListaComponentes extends JDialog {
 	private JTextField txtBuscar;
 	private JTable table;
 	public static DefaultTableModel modelo;
-
+	private int modelrow = -1;
+	private int seleccion = -1;
+	private Combos c = null;
+	private Combos cargaCombos = null;
+	private JButton btnSeleccionar;
+	public static Object[] fila;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -61,8 +79,6 @@ public class ListaComponentes extends JDialog {
 			panel.setLayout(null);
 			{
 				txtBuscar = new JTextField();
-				//txtBuscar.setBackground(UIManager.getColor("Button.focus"));
-				txtBuscar.setBounds(110, 22, 119, 20);
 				
 				txtBuscar.addKeyListener(new KeyAdapter() {
 					@Override
@@ -71,8 +87,10 @@ public class ListaComponentes extends JDialog {
 						TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(mode);
 						table.setRowSorter(tr);
 						tr.setRowFilter(RowFilter.regexFilter(txtBuscar.getText().trim()));
+						
 					}
 				});
+				txtBuscar.setBounds(110, 22, 119, 20);
 				panel.add(txtBuscar);
 				txtBuscar.setColumns(10);
 				
@@ -105,30 +123,29 @@ public class ListaComponentes extends JDialog {
 				modelo.setColumnIdentifiers(columns);
 				table = new JTable();
 				
-				/*table.addMouseListener(new MouseAdapter() {
+				table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					seleccion = table.getSelectedRow();
 					modelrow = table.convertRowIndexToModel(seleccion);
-					if(cargar==null) {
+					if(cargaCombos==null) {
 						if(seleccion!=-1 && (int)modelo.getValueAt(modelrow, 2)>0) {
+							
 							btnSeleccionar.setEnabled(true);
 							if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
-								btnInformacion.setEnabled(true);
-								c = Prodacom.getInstance().buscarCombo((String)modelo.getValueAt(modelrow, 0));
+								
+								c = Controladora.getInstance().buscarCombos((String)modelo.getValueAt(modelrow, 0));
 							}else {
-								btnInformacion.setEnabled(false);
+								
 							}
 						}else {
-							btnInformacion.setEnabled(false);
 							btnSeleccionar.setEnabled(false);
 						}
 					}else {
 						btnSeleccionar.setEnabled(false);
-						btnInformacion.setEnabled(false);
 					}
 				}
-			});*/
+			});
 				
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				table.setModel(modelo);
@@ -156,10 +173,19 @@ public class ListaComponentes extends JDialog {
 				btnSeleccionar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						
+						/*if('C'==((String)modelo.getValueAt(modelrow, 0)).charAt(0)) {
+							c = Controladora.getInstance().buscarCombos((String)modelo.getValueAt(modelrow, 0));
+							//Ventas a = new Ventas(c.getCod(),c.getNombre(),c.calcularprecio(),1);
+							dispose();
+							//a.setVisible(true);
+						}else {*/
+							Componente c = Controladora.getInstance().buscarComponenteByCode((String)modelo.getValueAt(modelrow, 0));
+							//Ventas a = new Ventas(c.getSerie(),c.getMarca()+" "+c.getModelo(),c.getPrecioVenta(),c.getCantReal());
+							dispose();
+							//a.setVisible(true);
+						//}
 					}
 				});
-				btnSeleccionar.setActionCommand("OK");
 				buttonPane.add(btnSeleccionar);
 				getRootPane().setDefaultButton(btnSeleccionar);
 			}
@@ -176,4 +202,94 @@ public class ListaComponentes extends JDialog {
 			}
 		}
 	}
+	
+/*private void loadTable(int seleccionado) {
+		
+		modelo.setRowCount(0);
+		
+		fila = new Object[modelo.getColumnCount()];
+		
+		if(seleccionado == 0) {
+			cargarTabla();
+		}
+		
+		if(seleccionado == 1) {
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) { //
+				
+				if(comp instanceof DiscoDuro) {
+				
+			    fila[0] = comp.getCodigoComponente();
+			    fila[1] = "Disco Duro";
+				fila[2] = comp.getPrecio();
+				fila[3] = comp.getCantidadMinima();
+				fila[4] = comp.getCantidadDisponible();
+				fila[5] = comp.getSerial();
+				fila[6] = comp.getMarca();
+				fila[7] = comp.getModelo();
+				fila[8] = comp.getProveedor();
+				
+				modelo.addRow(fila);
+				
+				//String codigoComponente,float precio, int cantidadMinima, int cantidadDisponible, String serial,String marca, String modelo, Proveedores proveedor,
+				// String tipoConexion, float almacenamiento
+			}
+			}
+		}else if(seleccionado == 2) {
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) {
+				if(comp instanceof MemoriaRam) {
+					
+					fila[0] = comp.getSerial();
+					fila[1] = "Memoria Ram";	
+					fila[2] = comp.getCantReal();
+					fila[3] = comp.getPrecioVenta();
+					fila[4] = comp.getModelo();
+					fila[5] = comp.getMarca();
+					
+					modelo.addRow(fila);
+					
+				}
+			}
+		}
+		else if(seleccionado == 3) {
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) {
+				if(comp instanceof Microprocesador){
+				fila[0] = comp.getSerial();							
+				fila[1] = "Microprocesador";							
+				fila[2] = comp.getCantReal();
+				fila[3] = comp.getPrecioVenta();
+				fila[4] = comp.getModelo();
+				fila[5] = comp.getMarca();
+				
+				modelo.addRow(fila);
+				}
+			}
+		}
+		else if(seleccionado == 4) {
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) {
+				if(comp instanceof Motherboard) {
+					fila[0] = comp.getSerial();
+					
+					fila[1] = "MotherBoard";
+					
+					fila[2] = comp.getCantReal();
+					fila[3] = comp.getPrecioVenta();
+					fila[4] = comp.getModelo();
+					fila[5] = comp.getMarca();
+					
+					modelo.addRow(fila);
+				}
+			}
+		}
+		else if(seleccionado == 5 ) {
+			for(Combos c : Controladora.getInstance().getMisCombos()) {
+				fila[0] = c.getCod();
+				fila[1] = "Combo";
+				fila[2] = 1;
+				fila[3] = c.calcularprecio();
+				fila[4] = c.getNombre();
+				fila[5] = "Unbranded";
+				modelo.addRow(fila);
+			}
+		}
+	}*/
 }

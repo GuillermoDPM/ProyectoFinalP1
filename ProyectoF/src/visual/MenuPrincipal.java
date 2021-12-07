@@ -177,6 +177,22 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_5);
+		
+		JMenu mnNewMenu_4 = new JMenu("Listas");
+		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Lista de Componentes");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListaComponentes regComponentes = new ListaComponentes();
+				regComponentes.setVisible(true);
+			}
+		});
+		mnNewMenu_4.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Clientes");
+		mnNewMenu_4.add(mntmNewMenuItem_7);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
