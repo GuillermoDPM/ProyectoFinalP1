@@ -29,6 +29,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -48,7 +51,6 @@ public class Facturacion extends JDialog {
 	private JTextField txtCliente;
 	private JTextField txtCodigoArticuloCombo;
 	private JTable table;
-	private JTextField txtPrecioTotal;
 	private JButton btnBuscarCliente;
 	private JButton btnArticulos;
 	private JButton btnClientes;
@@ -66,6 +68,13 @@ public class Facturacion extends JDialog {
 	private static JComboBox cbxVendedores;
 	
 	private static Factura auxiliar = null;
+	private JTextField txtNombreCliente;
+	private JLabel lblNewLabel_7;
+	private JLabel lblNewLabel_8;
+	private JTextField txtTelefonoCliente;
+	private JTextField txtBalanceCliente;
+	private JLabel lblNewLabel_6;
+	private JTextField txtTotalFactura;
 
 	/**
 	 * Launch the application.
@@ -87,7 +96,7 @@ public class Facturacion extends JDialog {
 		setModal(true);
 		setResizable(false);
 		setTitle("Facturacion");
-		setBounds(100, 100, 601, 665);
+		setBounds(100, 100, 578, 706);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,6 +131,9 @@ public class Facturacion extends JDialog {
 		txtFacturaFecha.setColumns(10);
 		txtFacturaFecha.setBounds(83, 42, 116, 18);
 		panel.add(txtFacturaFecha);
+		Calendar inicio=new GregorianCalendar();
+		inicio.setTime(new Date());
+		txtFacturaFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -142,7 +154,7 @@ public class Facturacion extends JDialog {
 			cbxVendedores.setVisible(true);
 		}
 		//JComboBox cbxVendedores = new JComboBox();
-		cbxVendedores.setBounds(22, 39, 127, 20);
+		cbxVendedores.setBounds(12, 42, 127, 20);
 		panel_1.add(cbxVendedores);
 		
 		
@@ -157,7 +169,7 @@ public class Facturacion extends JDialog {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(12, 272, 547, 310);
+		panel_2.setBounds(12, 272, 547, 338);
 		contentPanel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -167,8 +179,9 @@ public class Facturacion extends JDialog {
 		panel_2.add(lblNewLabel_4);
 		
 		txtCodigoArticuloCombo = new JTextField();
+		txtCodigoArticuloCombo.setEditable(false);
 		txtCodigoArticuloCombo.setColumns(10);
-		txtCodigoArticuloCombo.setBounds(173, 14, 102, 18);
+		txtCodigoArticuloCombo.setBounds(161, 12, 102, 18);
 		panel_2.add(txtCodigoArticuloCombo);
 		
 		JLabel lblNewLabel_5 = new JLabel("Cantidad:");
@@ -177,10 +190,12 @@ public class Facturacion extends JDialog {
 		panel_2.add(lblNewLabel_5);
 		
 		spnCantidadArticulos = new JSpinner();
+		spnCantidadArticulos.setEnabled(false);
 		spnCantidadArticulos.setBounds(352, 11, 61, 22);
 		panel_2.add(spnCantidadArticulos);
 		
 		btnAgregarArticulo = new JButton("Agregar");
+		btnAgregarArticulo.setEnabled(false);
 		btnAgregarArticulo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				row = new Object[model.getColumnCount()];
@@ -222,22 +237,24 @@ public class Facturacion extends JDialog {
 		model.setColumnIdentifiers(headers);
 		table.setModel(model);
 		
+		lblNewLabel_6 = new JLabel("Total:");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_6.setBounds(357, 310, 56, 16);
+		panel_2.add(lblNewLabel_6);
+		
+		txtTotalFactura = new JTextField();
+		txtTotalFactura.setEditable(false);
+		txtTotalFactura.setBounds(395, 308, 127, 18);
+		panel_2.add(txtTotalFactura);
+		txtTotalFactura.setColumns(10);
+		
 		btnClientes = new JButton("Clientes");
 		btnClientes.setBounds(447, 96, 112, 25);
 		contentPanel.add(btnClientes);
 		
-		JLabel lblNewLabel_6 = new JLabel("Total:");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_6.setBounds(374, 502, 78, 16);
-		contentPanel.add(lblNewLabel_6);
-		
-		txtPrecioTotal = new JTextField();
-		txtPrecioTotal.setColumns(10);
-		txtPrecioTotal.setBounds(417, 500, 102, 18);
-		contentPanel.add(txtPrecioTotal);
-		
 		panel_4 = new JPanel();
-		panel_4.setBounds(12, 98, 311, 144);
+		panel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBounds(12, 98, 311, 161);
 		contentPanel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -254,12 +271,46 @@ public class Facturacion extends JDialog {
 		btnBuscarCliente = new JButton("Buscar");
 		btnBuscarCliente.setBounds(218, 42, 81, 18);
 		panel_4.add(btnBuscarCliente);
+		
+		txtNombreCliente = new JTextField();
+		txtNombreCliente.setEditable(false);
+		txtNombreCliente.setBounds(12, 73, 287, 18);
+		panel_4.add(txtNombreCliente);
+		txtNombreCliente.setColumns(10);
+		
+		lblNewLabel_7 = new JLabel("Telefono:");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_7.setBounds(12, 104, 68, 16);
+		panel_4.add(lblNewLabel_7);
+		
+		lblNewLabel_8 = new JLabel("Balance:");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_8.setBounds(166, 104, 56, 16);
+		panel_4.add(lblNewLabel_8);
+		
+		txtTelefonoCliente = new JTextField();
+		txtTelefonoCliente.setEditable(false);
+		txtTelefonoCliente.setBounds(12, 126, 132, 18);
+		panel_4.add(txtTelefonoCliente);
+		txtTelefonoCliente.setColumns(10);
+		
+		txtBalanceCliente = new JTextField();
+		txtBalanceCliente.setEditable(false);
+		txtBalanceCliente.setBounds(166, 126, 133, 18);
+		panel_4.add(txtBalanceCliente);
+		txtBalanceCliente.setColumns(10);
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cliente cliente = Controladora.getInstance().buscarCliente(txtCliente.getText());
 				
 				if(cliente!=null) {
-					
+					txtNombreCliente.setText(cliente.getNombre());
+					txtTelefonoCliente.setText(cliente.getTelefono());
+					txtBalanceCliente.setText(String.valueOf(Controladora.getInstance().CreditCliente(cliente)));
+					habilitar();
+				}else {
+					JOptionPane.showMessageDialog(null, "El cliente introducido no existe en el sistema", "Información", JOptionPane.ERROR_MESSAGE);
+
 				}
 			}
 		});
@@ -269,28 +320,91 @@ public class Facturacion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnPagoCredito = new JButton("Pagar credito");
+			btnPagoCredito.setEnabled(false);
 			btnPagoCredito.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					int ok = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar la factura");
+					Cliente cliente = Controladora.getInstance().buscarCliente(txtCliente.getText());
+					
+					if(cliente!=null && ok==JOptionPane.OK_OPTION) {
+						float pago = Controladora.getInstance().CreditCliente(cliente);
+						
+						if(pago>=Float.parseFloat(txtTotalFactura.getText())) {
+							Usuario user = Controladora.getInstance().BuscarUser(cbxVendedores.getSelectedItem().toString());
+							Factura factura = new Factura(txtFacturaNumero.getText(),Float.parseFloat(txtTotalFactura.getText()),user,cliente,false);
+							
+							for(Combos combo: combosTabla) {
+								factura.insertarcombos(combo);
+							}
+							
+							for(Componente componentes:componentesTabla) {
+								factura.insertarcomponentes(componentes);
+							}
+							
+							Controladora.getInstance().insertarFacturas(factura);
+							JOptionPane.showMessageDialog(null, "El credito restante para el cliente es de: "+(pago-(Float.parseFloat(txtTotalFactura.getText()))));
+							decrementar();
+							clear();
+							deshabilitar();
+						}else {
+							JOptionPane.showMessageDialog(null, "Su credito disponible no es suficiente para pagar la factura");
+
+						}
+					}
+					
+					
+
 				}
+
 			});
 			
 			btnNewButton = new JButton("Refrescar");
 			buttonPane.add(btnNewButton);
 			buttonPane.add(btnPagoCredito);
+			btnNewButton.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					clear();	
+					deshabilitar();
+				}
+			});
 			{
 				btnPago = new JButton("Pagar");
+				btnPago.setEnabled(false);
 				btnPago.setActionCommand("OK");
 				btnPago.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
-						Componente aux = Controladora.getInstance().buscarComponenteByCode(txtCodigoArticuloCombo.getText());
-						Combos aux1 = Controladora.getInstance().buscarCombos(txtCodigoArticuloCombo.getText());
-						if(aux!=null) {
-						//	Factura fac = new Factura();
-					    }else if(aux1!=null) {
-					    	
-					    }
+						int ok = JOptionPane.showConfirmDialog(null, "Esta seguro que desea realizar la factura");
+						Cliente cliente = Controladora.getInstance().buscarCliente(txtCliente.getText());
+						
+						if(cliente!=null && ok==JOptionPane.OK_OPTION) {
+							float pago = Float.parseFloat(JOptionPane.showInputDialog("Digite el monto de pago"));
+							if(pago>=Float.parseFloat(txtTotalFactura.getText())) {
+								Usuario user = Controladora.getInstance().BuscarUser(cbxVendedores.getSelectedItem().toString());
+								Factura factura = new Factura(txtFacturaNumero.getText(),Float.parseFloat(txtTotalFactura.getText()),user,cliente,true);
+							
+								for(Combos combo: combosTabla) {
+									factura.insertarcombos(combo);
+								}
+								
+								for(Componente componentes:componentesTabla) {
+									factura.insertarcomponentes(componentes);
+								}
+								
+								Controladora.getInstance().insertarFacturas(factura);
+								JOptionPane.showMessageDialog(null, "Su devuelta es: "+(pago-(Float.parseFloat(txtTotalFactura.getText()))));
+								decrementar();
+								clear();
+								deshabilitar();
+								
+							}else {
+								JOptionPane.showMessageDialog(null, "Ha ingresado una cantidad inferior a la requerida");
+							}
+						}
+						
 					}
+
 				});
 				buttonPane.add(btnPago);
 				getRootPane().setDefaultButton(btnPago);
@@ -316,5 +430,49 @@ public class Facturacion extends JDialog {
 	      for(int i=0;i<table.getRowCount();i++) {
 	    	  total = total + ((Float.parseFloat(model.getValueAt(i, 1).toString()))*Float.parseFloat(model.getValueAt(i, 2).toString()));
 	      }	
+	      txtTotalFactura.setText(String.valueOf(total));
+	}
+	
+	private void decrementar() {
+		Factura factura = Controladora.getInstance().buscarFactura(txtFacturaNumero.getText());
+		for (Componente c : componentesTabla) {
+			for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
+				if(c.getCodigoComponente().equalsIgnoreCase(factura.getMisComponentes().get(i).getCodigoComponente())) {
+					c.setCantidadDisponible(c.getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString())));
+				}
+			}
+		}
+		
+	}
+	
+	private void clear() {
+		txtFacturaNumero.setText("F"+Controladora.getInstance().getGenCodigoFactura());
+	    txtCliente.setText("");
+	    txtNombreCliente.setText("");
+	    txtTelefonoCliente.setText("");
+	    txtBalanceCliente.setText("");
+	    txtCodigoArticuloCombo.setText("");
+	    spnCantidadArticulos.setValue(0);
+	    txtTotalFactura.setText("");
+	    model.setRowCount(0);
+	    Calendar inicio=new GregorianCalendar();
+		inicio.setTime(new Date());
+		txtFacturaFecha.setText(""+inicio.get(Calendar.DAY_OF_MONTH)+"/"+(1+(inicio.get(Calendar.MONTH)))+"/"+inicio.get(Calendar.YEAR));
+	}
+	
+	private void habilitar() {
+		txtCodigoArticuloCombo.setEditable(true);
+		spnCantidadArticulos.setEnabled(true);
+        btnAgregarArticulo.setEnabled(true);
+        btnPago.setEnabled(true);
+        btnPagoCredito.setEnabled(true);
+	}
+	
+	private void deshabilitar() {
+		txtCodigoArticuloCombo.setEditable(false);
+		spnCantidadArticulos.setEnabled(false);
+		btnAgregarArticulo.setEnabled(false);
+		btnPago.setEnabled(false);
+		btnPagoCredito.setEnabled(false);
 	}
 }

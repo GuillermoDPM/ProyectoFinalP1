@@ -275,27 +275,15 @@ public class RegisCliente extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Cliente aux1 = Controladora.getInstance().buscarCliente(txtIdentificacion.getText());
 						if(aux1==null) {
-						if(rbtnIndividuo.isEnabled()) {
 						Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(),"Individuo", txtIdentificacion.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));
 						Controladora.getInstance().insertarClientes(aux);
-						}
-						if(rbtnEmpresa.isEnabled()) {
-							Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(),"Empresa", txtIdentificacion.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));	
-							Controladora.getInstance().insertarClientes(aux);
-						}
 						
 						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 						clean();
 						deshabilitar();
 						}else {
-							if(rbtnIndividuo.isEnabled()) {
-								Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(),"Individuo", txtIdentificacion.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));
+								Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(),"Individuo", txtIdentificacion.getText(),Float.parseFloat((spnLimiteCredito.getValue().toString())));
 								Controladora.getInstance().modificarCliente(aux);
-								}
-								if(rbtnEmpresa.isEnabled()) {
-									Cliente aux = new Cliente(txtNombreCliente.getText(), txtDireccionCliente.getText(), txtTelefono.getText(),"Empresa", txtIdentificacion.getText(),Integer.valueOf(spnLimiteCredito.getValue().toString()));	
-									Controladora.getInstance().modificarCliente(aux);
-								}
 							JOptionPane.showMessageDialog(null, "Modificacion Satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 							clean();
 							deshabilitar();
