@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -44,7 +45,6 @@ public class Facturacion extends JDialog {
 	private Object row[];
 	private JTextField txtFacturaNumero;
 	private JTextField txtFacturaFecha;
-	private JTextField txtVendedor;
 	private JTextField txtCliente;
 	private JTextField txtCodigoArticuloCombo;
 	private JTable table;
@@ -62,6 +62,10 @@ public class Facturacion extends JDialog {
 	private ArrayList<Componente>componentesTabla = new ArrayList<Componente>();
 	private ArrayList<Combos>combosTabla = new ArrayList<Combos>();
 	private JPanel panel_4;
+	
+	private static JComboBox cbxVendedores;
+	
+	private static Factura auxiliar = null;
 
 	/**
 	 * Launch the application.
@@ -130,10 +134,18 @@ public class Facturacion extends JDialog {
 		lblNewLabel_2.setBounds(12, 13, 67, 16);
 		panel_1.add(lblNewLabel_2);
 		
-		txtVendedor = new JTextField();
-		txtVendedor.setColumns(10);
-		txtVendedor.setBounds(12, 39, 199, 18);
-		panel_1.add(txtVendedor);
+		
+		cbxVendedores = new JComboBox(Controladora.getInstance().NombresVendedores().toArray());
+		if(auxiliar!=null) {
+			cbxVendedores.setVisible(false);
+		}else {
+			cbxVendedores.setVisible(true);
+		}
+		//JComboBox cbxVendedores = new JComboBox();
+		cbxVendedores.setBounds(22, 39, 127, 20);
+		panel_1.add(cbxVendedores);
+		
+		
 		
 		btnArticulos = new JButton("Articulos");
 		btnArticulos.setBounds(335, 96, 112, 25);

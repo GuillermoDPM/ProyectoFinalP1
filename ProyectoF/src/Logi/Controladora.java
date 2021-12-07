@@ -3,6 +3,7 @@ package Logi;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Controladora implements Serializable {
 	
 	private static final long serialVersionUID = 4059652231878894539L;
@@ -420,6 +421,16 @@ public Factura Buscarcodigo(String codigofactura) {
 
 public static void setInstanciaGlobal(Controladora instanciaGlobal) {
 	Controladora.instanciaGlobal = instanciaGlobal;
+}
+
+public ArrayList<String> NombresVendedores() {
+	ArrayList<String>nombres = new ArrayList<String>();
+	for(Usuario p : misUsuarios) {
+		if(p instanceof Usuario) {
+			nombres.add(p.getNombre());
+		}
+	}
+	return nombres;
 }
 
 

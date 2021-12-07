@@ -188,6 +188,7 @@ public class RegisCliente extends JDialog {
 						txtNombreCliente.setEditable(true);
 						txtDireccionCliente.setEditable(true);
 						txtTelefono.setEditable(true);
+					
 					}
 				}else {
 					txtNombreCliente.setText(aux.getNombre());
