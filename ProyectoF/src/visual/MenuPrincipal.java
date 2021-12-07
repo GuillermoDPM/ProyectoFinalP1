@@ -62,11 +62,11 @@ public class MenuPrincipal extends JFrame {
 					empresaWrite = new ObjectOutputStream(empresa2);
 					empresaWrite.writeObject(Controladora.getInstance());
 
-					/*File fichero = new File("ZinioComputer.dat");
+					File fichero = new File("ZinioComputer.dat");
 					FileOutputStream fileOut = new FileOutputStream(fichero);
 					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 					objectOut.writeObject(Controladora.getInstance());
-					objectOut.close();*/
+					objectOut.close();
 					
 					} 
 

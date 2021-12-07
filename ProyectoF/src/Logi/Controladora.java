@@ -1,6 +1,7 @@
 package Logi;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
 
@@ -419,6 +420,17 @@ public Factura Buscarcodigo(String codigofactura) {
 	return factura;
 	}
 
+public float CreditCliente(Cliente c) {
+	float res = 0;
+	for(Factura f : misFacturas) {
+		if(f.getCliente().getIdentifiacion().equalsIgnoreCase(c.getIdentifiacion()) && !f.isPagado()) {
+			res+=f.getPrecioTotal();
+		}
+	}
+	
+	return c.getLimiteCredito()-res;
+}
+
 public static void setInstanciaGlobal(Controladora instanciaGlobal) {
 	Controladora.instanciaGlobal = instanciaGlobal;
 }
@@ -433,6 +445,20 @@ public ArrayList<String> NombresVendedores() {
 	return nombres;
 }
 
+public Usuario BuscarUser(String user) {
+	Usuario usuario = null;
+	boolean encontrado = false;
+	int i = 0;
+	while (!encontrado && i <misUsuarios.size()) {
+		if(misUsuarios.get(i).getNombre().equalsIgnoreCase(user))
+		{
+			usuario = misUsuarios.get(i);
+			encontrado = true;
+		}
+		i++;
+	}
+	return usuario;
+	}
 
 	
 }
