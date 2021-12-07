@@ -356,6 +356,7 @@ public void insertarCombos(Combos combo) {
 	cantidadCombos++;
 }
 
+
 public Combos buscarCombos(String codigo) {
 	Combos combo = null;
 	boolean encontrado = false;

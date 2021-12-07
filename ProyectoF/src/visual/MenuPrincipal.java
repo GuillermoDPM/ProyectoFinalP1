@@ -57,29 +57,48 @@ public class MenuPrincipal extends JFrame {
 				FileOutputStream empresa2;
 				ObjectOutputStream empresaWrite;
 				try {
-
-					File fichero = new File("ZinioComputer.dat");
-					FileOutputStream fileOut = new FileOutputStream(fichero);
-					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-					//objectOut.writeObject(Controladora.getInstance());
-					objectOut.close();
 					
-					} catch (Exception ex) {
-					ex.printStackTrace();
-					}
-
-			/*		empresa2 = new  FileOutputStream("ZinioComputer.dat");
+					empresa2 = new  FileOutputStream("ZinioComputer.dat");
 					empresaWrite = new ObjectOutputStream(empresa2);
 					empresaWrite.writeObject(Controladora.getInstance());
+
+					/*File fichero = new File("ZinioComputer.dat");
+					FileOutputStream fileOut = new FileOutputStream(fichero);
+					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+					objectOut.writeObject(Controladora.getInstance());
+					objectOut.close();*/
+					
+					} 
+
 				 catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}	*/
+				}	
 			}
 		});
+		
+		/*addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream empresa2;
+				ObjectOutputStream empresaWrite;
+				try {
+					empresa2 = new  FileOutputStream("empresa.dat");
+					empresaWrite = new ObjectOutputStream(empresa2);
+					empresaWrite.writeObject(Control.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});*/
 		
 		setTitle("Zinio Computer");
 		setResizable(false);

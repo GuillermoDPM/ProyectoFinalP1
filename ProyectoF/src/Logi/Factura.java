@@ -17,6 +17,7 @@ public class Factura implements Serializable {
  private String tipoDePago;
  private boolean pagado;
  
+ 
  public Factura(String codigo, float precioTotal, Usuario vendedor, Cliente cliente, boolean pagado) {
 		super();
 		this.codigo = codigo;
