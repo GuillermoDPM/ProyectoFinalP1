@@ -216,6 +216,7 @@ private void loadTable(int seleccionado) {
 		
 		fila = new Object[modelo.getColumnCount()];
 		
+		
 		if(seleccionado == 1) {
 			for (Componente comp : Controladora.getInstance().getMisComponentes()) { //
 				
