@@ -12,13 +12,13 @@ public class Proveedores implements Serializable {
 	private String direccion;
 	private float cuentaPorPagar;
 	
-	public Proveedores(String nombre, String rnc, String telefono, String direccion, float cuentaPorPagar) {
+	public Proveedores(String nombre, String rnc, String telefono, String direccion) {
 		super();
 		this.nombre = nombre;
 		this.rnc = rnc;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		this.cuentaPorPagar = cuentaPorPagar;
+		this.cuentaPorPagar = 0;
 	}
 
 	public String getNombre() {

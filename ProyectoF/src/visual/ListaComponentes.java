@@ -340,6 +340,7 @@ public void buscarTable(String codigo, int opcion) {
 	modelo.setRowCount(0);
 	
 	fila = new Object[modelo.getColumnCount()];
+	
 	if(opcion==0) {
 		
 		for (Componente comp : Controladora.getInstance().getMisComponentes()) { 

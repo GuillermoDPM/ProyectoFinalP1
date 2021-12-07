@@ -230,6 +230,28 @@ public Proveedores buscarProveedor(String rnc) {
 	return proveedor;
 }
 
+public int buscarIndexProveedor(String rnc) {
+	int proveedor = -1;
+	int i = 0;
+	boolean encontrado = false;
+	while (!encontrado && i < cantidadProveedores) {
+		if(misProveedores.get(i).getrnc().equalsIgnoreCase(rnc)) {
+			encontrado = true;
+			proveedor = i;
+		}
+		i++;
+	}
+	return proveedor;
+}
+
+public void modificarProveedor(Proveedores updated) {
+	int index = buscarIndexProveedor(updated.getrnc());
+	if(index!= -1){
+	   misProveedores.set(index, updated);
+	}
+	
+}
+
 public void insertarFacturas(Factura factura) {
 	misFacturas.add(factura);
 	cantidadFacturas++;
