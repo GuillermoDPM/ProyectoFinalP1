@@ -41,7 +41,6 @@ public class RegCombos extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private DefaultTableModel model;
 	private Object[] row;
-	private Componente selected;
 	private JTextField txtCodigoCombo;
 	private JTextField txtNombreCombo;
 	private JTextField txtCodigoArticulo;

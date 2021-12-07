@@ -17,6 +17,7 @@ public class Controladora implements Serializable {
    private int cantidadClientes;
    private int cantidadProveedores;
    private int componentesTotalidad;
+   private int cantidadFacturas;
    private int cantidadCombos;
    private int cantidadOrdenes;
    private int cantidadMemoria;
@@ -24,7 +25,7 @@ public class Controladora implements Serializable {
    private int cantidadMotherboard;
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
-   private int genCodigoCliente;
+   private int genCodigoFactura;
    
    public static Controladora instanciaGlobal = null;
 
@@ -38,7 +39,7 @@ private Controladora() {
 	this.misUsuarios = new ArrayList<Usuario>();
 	this.misProveedores = new ArrayList<Proveedores>();
 	this.misOrdenes = new ArrayList<OrdenCompra>();
-	genCodigoCliente=1;
+	genCodigoFactura=1;
 }
 
 public static Controladora getInstance() {
@@ -160,12 +161,12 @@ public void setGeneradorCodigoOrdenes(int generadorCodigoOrdenes) {
 	this.generadorCodigoOrdenes = generadorCodigoOrdenes;
 }
 
-public int getGenCodigoCliente() {
-	return genCodigoCliente;
+public int getGenCodigoFactura() {
+	return genCodigoFactura;
 }
 
-public void setGenCodigoCliente(int genCodigoCliente) {
-	this.genCodigoCliente = genCodigoCliente;
+public void setGenCodigoFactura(int genCodigoFactura) {
+	this.genCodigoFactura = genCodigoFactura;
 }
 
 public int getCantidadProveedores() {
@@ -190,6 +191,14 @@ public int getCantidadCombos() {
 
 public void setCantidadCombos(int cantidadCombos) {
 	this.cantidadCombos = cantidadCombos;
+}
+
+public int getCantidadFacturas() {
+	return cantidadFacturas;
+}
+
+public void setCantidadFacturas(int cantidadFacturas) {
+	this.cantidadFacturas = cantidadFacturas;
 }
 
 public void insertarOrdenCompra(OrdenCompra ordenCompra) {
@@ -219,11 +228,31 @@ public Proveedores buscarProveedor(String rnc) {
 	return proveedor;
 }
 
+public void insertarFacturas(Factura factura) {
+	misFacturas.add(factura);
+	cantidadFacturas++;
+	genCodigoFactura++;
+}
+
+public Factura buscarFactura(String codigoFactura) {
+	Factura factura = null;
+	boolean encontrado = false;
+	int indexBuscador=0;
+
+	while (!encontrado && indexBuscador<misFacturas.size()) {
+
+		if(misFacturas.get(indexBuscador).getCodigo().equalsIgnoreCase(codigoFactura)) {
+			factura=misFacturas.get(indexBuscador);
+			encontrado = true;				
+		}
+		indexBuscador++;
+	}
+	return factura;
+}
 
 public void insertarClientes(Cliente cliente) {
 	misClientes.add(cliente);
 	cantidadClientes++;
-    setGenCodigoCliente(getGenCodigoCliente() + 1);
 }
 
 public Cliente buscarCliente(String cedula) {

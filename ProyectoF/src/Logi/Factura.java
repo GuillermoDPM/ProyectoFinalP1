@@ -2,11 +2,13 @@ package Logi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Factura implements Serializable {
 	
 	private static final long serialVersionUID = 5L;
  private String codigo;
+ private Date fecha;
  private float precioTotal;
  private Usuario vendedor;
  private ArrayList<Combos> misCombos;
@@ -15,14 +17,15 @@ public class Factura implements Serializable {
  private String tipoDePago;
  private boolean pagado;
  
- public Factura(String codigo, float precioTotal, Usuario vendedor, ArrayList<Combos> misCombos,
-			ArrayList<Componente> misComponentes, Cliente cliente, String tipoDePago, boolean pagado) {
+ public Factura(String codigo, float precioTotal, Usuario vendedor, Cliente cliente, boolean pagado) {
 		super();
 		this.codigo = codigo;
 		this.precioTotal = precioTotal;
 		this.vendedor = vendedor;
+		this.setFecha(fecha);
 		this.misCombos = new ArrayList<Combos>();
 		this.misComponentes = new ArrayList<Componente>();
+		this.fecha = new Date();
 		this.cliente = cliente;
 		this.tipoDePago = tipoDePago;
 		this.pagado = pagado;
@@ -75,6 +78,22 @@ public boolean isPagado() {
 }
 public void setPagado(boolean pagado) {
 	this.pagado = pagado;
+}
+
+public Date getFecha() {
+	return fecha;
+}
+
+public void setFecha(Date fecha) {
+	this.fecha = fecha;
+}
+
+public void insertarcomponentes(Componente c) {
+	misComponentes.add(c);
+}
+
+public void insertarcombos(Combos c) {
+	misCombos.add(c);
 }
 
 }
