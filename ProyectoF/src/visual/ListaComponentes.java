@@ -177,9 +177,16 @@ public class ListaComponentes extends JDialog {
 					
 				}
 				{
-					JLabel lblNewLabel = new JLabel("Buscar");
-					lblNewLabel.setBounds(36, 25, 46, 14);
-					panel.add(lblNewLabel);
+					JButton btnBuscar = new JButton("Buscar");
+					btnBuscar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							buscarTable(txtBuscar.getText(), 1);
+							
+							
+						}
+					});
+					btnBuscar.setBounds(10, 21, 89, 23);
+					panel.add(btnBuscar);
 				}
 			
 				{
@@ -206,16 +213,51 @@ public class ListaComponentes extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+		buscarTable("", 0);
+		
 	}
 	
 	
 	
-private void loadTable(int seleccionado) {
+public void loadTable(int seleccionado) {
 		
 		modelo.setRowCount(0);
 		
 		fila = new Object[modelo.getColumnCount()];
 		
+		if(seleccionado ==0) {
+			
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) { 
+				
+				if(comp instanceof DiscoDuro) {
+					
+					fila[1] = "Disco Duro";
+				}
+				if(comp instanceof MemoriaRam) {
+					fila[1] = "RAM";
+				}
+				if(comp instanceof Microprocesador){
+					fila[1] = "Microporcesador";
+				}
+				if(comp instanceof Motherboard) {
+					fila[1] = "Motherboard";
+				}
+				
+			    fila[0] = comp.getCodigoComponente();
+			    fila[2] = comp.getCantidadDisponible();
+				fila[3] = comp.getPrecio();//
+				fila[4] = comp.getModelo();//
+				fila[5] = comp.getMarca();//
+				
+				
+				modelo.addRow(fila);
+				
+				
+		
+				
+			}
+		}
+
 		if(seleccionado == 1) {
 			for (Componente comp : Controladora.getInstance().getMisComponentes()) { //
 				
@@ -292,6 +334,78 @@ private void loadTable(int seleccionado) {
 			}
 		}
 	}
+
+public void buscarTable(String codigo, int opcion) {
+	
+	modelo.setRowCount(0);
+	
+	fila = new Object[modelo.getColumnCount()];
+	if(opcion==0) {
+		
+		for (Componente comp : Controladora.getInstance().getMisComponentes()) { 
+			
+			
+			
+		    fila[0] = comp.getCodigoComponente();
+		    if(comp instanceof DiscoDuro) {
+				
+				fila[1] = "Disco Duro";
+			}
+			if(comp instanceof MemoriaRam) {
+				fila[1] = "MemoriaRam";
+			}
+			if(comp instanceof Microprocesador){
+				fila[1] = "Microporcesador";
+			}
+			if(comp instanceof Motherboard) {
+				fila[1] = "Motherboard";
+			}
+		   // fila[1] = "TODOS";
+		    fila[2] = comp.getCantidadDisponible();
+			fila[3] = comp.getPrecio();//
+			fila[4] = comp.getModelo();//
+			fila[5] = comp.getMarca();//
+			
+			
+			modelo.addRow(fila);
+			
+		}
+	}
+		
+		if(opcion == 1 ) {
+			for (Componente comp : Controladora.getInstance().getMisComponentes()) {
+				if(comp.getCodigoComponente().equalsIgnoreCase(codigo)) {
+					
+					if(comp instanceof DiscoDuro) {
+						
+						fila[1] = "Disco Duro";
+					}
+					if(comp instanceof MemoriaRam) {
+						fila[1] = "RAM";
+					}
+					if(comp instanceof Microprocesador){
+						fila[1] = "Microporcesador";
+					}
+					if(comp instanceof Motherboard) {
+						fila[1] = "Motherboard";
+					}
+					
+				    fila[0] = comp.getCodigoComponente();
+				    fila[2] = comp.getCantidadDisponible();
+					fila[3] = comp.getPrecio();//
+					fila[4] = comp.getModelo();//
+					fila[5] = comp.getMarca();//
+					
+					
+					modelo.addRow(fila);
+					
+				}
+			}
+		}
+		
+	
+	
+}
 
 
 }
