@@ -42,7 +42,6 @@ public class RegistrarComponentes extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtCodigo;
 	private JTextField txtMarca;
-	private JTextField txtConexionDisco;
 	private JRadioButton rdbtnMemoriaRam;
 	private JRadioButton rdbtnMicroprocesador;
 	private JRadioButton rdbtnMotherboard;
@@ -75,6 +74,7 @@ public class RegistrarComponentes extends JFrame {
 	private JComboBox cbxSocket;
 	private JLabel lblNewLabel_5;
 	private JTextField txtModelo;
+	private JComboBox cbxTipoConexionDiscos;
 	/**
 	 * Launch the application.
 	 */
@@ -105,6 +105,34 @@ public class RegistrarComponentes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JPanel JPDiscoDuro = new JPanel();
+		JPDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPDiscoDuro.setBounds(12, 249, 484, 136);
+		contentPane.add(JPDiscoDuro);
+		JPDiscoDuro.setLayout(null);
+		
+		spnAlmacenamientoDisco = new JSpinner();
+		spnAlmacenamientoDisco.setEnabled(false);
+		spnAlmacenamientoDisco.setBounds(179, 89, 117, 22);
+		JPDiscoDuro.add(spnAlmacenamientoDisco);
+		
+		JLabel lblAlmacenamiento = new JLabel("Almacenamiento:");
+		lblAlmacenamiento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAlmacenamiento.setBounds(20, 92, 117, 14);
+		JPDiscoDuro.add(lblAlmacenamiento);
+		
+		JLabel lblTipoDeConexin = new JLabel("Tipo de Conexi\u00F3n:");
+		lblTipoDeConexin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoDeConexin.setBounds(10, 61, 132, 14);
+		JPDiscoDuro.add(lblTipoDeConexin);
+		
+		cbxTipoConexionDiscos = new JComboBox();
+		cbxTipoConexionDiscos.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccione>>", "IDE", "SATA", "SATA2", "SATA3"}));
+		cbxTipoConexionDiscos.setEnabled(false);
+		cbxTipoConexionDiscos.setBounds(179, 58, 117, 22);
+		JPDiscoDuro.add(cbxTipoConexionDiscos);
+		JPDiscoDuro.setVisible(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Introduccion articulo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -374,7 +402,7 @@ public class RegistrarComponentes extends JFrame {
 					componente = new MemoriaRam(txtCodigo.getText(),Integer.valueOf(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,Integer.valueOf(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
 				}
 				if(rdbtnDiscoDuro.isSelected()) {
-					componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
+					componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxTipoConexionDiscos.getSelectedItem().toString(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
 				}
 				Controladora.getInstance().insertarComponentes(componente);
 				JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -402,7 +430,7 @@ public class RegistrarComponentes extends JFrame {
 						componente = new MemoriaRam(txtCodigo.getText(),Float.parseFloat(spnPrecio.getValue().toString()),Integer.valueOf(spnCantidadMinima.getValue().toString()),Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,Float.parseFloat(spnCapacidadRam.getValue().toString()),cbxTipoRam.getSelectedItem().toString());
 					}
 					if(rdbtnDiscoDuro.isSelected()) {
-						componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,txtConexionDisco.getText(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
+						componente = new DiscoDuro(txtCodigo.getText(),(float)Integer.valueOf(spnPrecio.getValue().toString()),(int) Integer.valueOf(spnCantidadMinima.getValue().toString()),(int) Integer.valueOf(spnCantidadReal.getValue().toString()),txtSerial.getText(),txtMarca.getText(),txtModelo.getText(),proveedor,cbxTipoConexionDiscos.getSelectedItem().toString(),(float) Integer.valueOf(spnAlmacenamientoDisco.getValue().toString()));
 					}
 					Controladora.getInstance().modificarComponente(componente);
 					JOptionPane.showMessageDialog(null, "Modificacion exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -421,36 +449,8 @@ public class RegistrarComponentes extends JFrame {
 		JPComponentes.setBounds(12, 176, 526, 60);
 		contentPane.add(JPComponentes);
 		JPComponentes.setLayout(null);
-		
-		JPanel JPDiscoDuro = new JPanel();
-		JPDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPDiscoDuro.setBounds(12, 249, 484, 136);
-		contentPane.add(JPDiscoDuro);
-		JPDiscoDuro.setLayout(null);
-		
-		spnAlmacenamientoDisco = new JSpinner();
-		spnAlmacenamientoDisco.setEnabled(false);
-		spnAlmacenamientoDisco.setBounds(179, 89, 117, 22);
-		JPDiscoDuro.add(spnAlmacenamientoDisco);
-		
-		JLabel lblAlmacenamiento = new JLabel("Almacenamiento:");
-		lblAlmacenamiento.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlmacenamiento.setBounds(20, 92, 117, 14);
-		JPDiscoDuro.add(lblAlmacenamiento);
-		
-		JLabel lblTipoDeConexin = new JLabel("Tipo de Conexi\u00F3n:");
-		lblTipoDeConexin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTipoDeConexin.setBounds(10, 61, 132, 14);
-		JPDiscoDuro.add(lblTipoDeConexin);
-		
-		txtConexionDisco = new JTextField();
-		txtConexionDisco.setEnabled(false);
-		txtConexionDisco.setBounds(179, 58, 86, 20);
-		JPDiscoDuro.add(txtConexionDisco);
-		txtConexionDisco.setColumns(10);
 		JPMicroprocesador.setVisible(false);
 		JPMemoriaRam.setVisible(true);
-		JPDiscoDuro.setVisible(false);
 		//BORRAR
 		
 		
@@ -713,6 +713,7 @@ public class RegistrarComponentes extends JFrame {
 		cbxTipoRam.setSelectedItem("<<Seleccione>>");
 		cbxTipoRamBoard.setSelectedItem("<<Seleccione>>");
 		cbxSocket.setSelectedItem("<<Seleccione>>");
+		cbxTipoConexionDiscos.setSelectedItem("<<Seleccione>>");
         rdbtnIDE.setSelected(false);
         rdbtnSATA.setSelected(false);
         rdbtnSATA2.setSelected(false);
@@ -725,7 +726,7 @@ public class RegistrarComponentes extends JFrame {
 		txtModelo.setEditable(true);
 		txtSerial.setEditable(true);
 		txtProveedorComponentes.setEditable(true);
-		txtConexionDisco.setEditable(true);
+		cbxTipoConexionDiscos.setEnabled(true);
 		spnPrecio.setEnabled(true);
 		spnAlmacenamientoDisco.setEnabled(true);
 		spnCantidadMinima.setEnabled(true);
@@ -743,7 +744,8 @@ public class RegistrarComponentes extends JFrame {
         rdbtnDiscoDuro.setEnabled(true);
         rdbtnMicroprocesador.setEnabled(true);
         rdbtnMotherboard.setEnabled(true);
-        btnRegistrar.setEnabled(true);
+     //   btnRegistrar.setEnabled(true);
+        btnBuscarProveedor.setEnabled(true);
 	}
 	
 	private void deshabilitar() {
@@ -758,6 +760,7 @@ public class RegistrarComponentes extends JFrame {
 		spnCantidadReal.setEnabled(false);
 		spnCapacidadRam.setEnabled(false);
 		spnVelocidadProcesador.setEnabled(false);
+		cbxTipoConexionDiscos.setEnabled(false);
 		cbxConectorProcesador.setEnabled(false);
 		cbxTipoRam.setEnabled(false);
 		cbxTipoRamBoard.setEnabled(false);
@@ -771,5 +774,6 @@ public class RegistrarComponentes extends JFrame {
         rdbtnMicroprocesador.setEnabled(false);
         rdbtnMotherboard.setEnabled(false);
         btnRegistrar.setEnabled(false);
+        btnModificar.setEnabled(false);
 	}
 }
