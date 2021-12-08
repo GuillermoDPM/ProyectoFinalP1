@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -24,6 +25,7 @@ import Logi.Combos;
 import Logi.Componente;
 import Logi.Controladora;
 import Logi.DiscoDuro;
+import Logi.Factura;
 import Logi.Proveedores;
 import Logi.Cliente;
 import Logi.Combos;
@@ -46,7 +48,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class ListaCliente extends JDialog {
+public class ListaFactura extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtBuscar;
@@ -78,7 +80,7 @@ public class ListaCliente extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaCliente() {
+	public ListaFactura() {
 		
 		setBounds(100, 100, 587, 437);
 		getContentPane().setLayout(new BorderLayout());
@@ -117,8 +119,9 @@ public class ListaCliente extends JDialog {
 				
 				
 				modelo = new DefaultTableModel();
-				String[] columns = {"Nombre","Direccion","Telefono","Tipo","Identificacion","Credito"}; 
-				//(String nombre, String direccion, String telefono, String tipo, String identificacion, float limiteCredito)
+				
+			String columns[] = {"Código","Cliente","Vendedor","Total","Fecha"};
+
 				modelo.setColumnIdentifiers(columns);
 				table = new JTable();
 				
@@ -204,33 +207,6 @@ public class ListaCliente extends JDialog {
 						
 					}
 				});
-				{
-					JButton btnPagarCuenta = new JButton("Pagar Cuenta");
-					btnPagarCuenta.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
-							int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");
-							if(opcion==JOptionPane.OK_OPTION) {
-								Controladora.getInstance().PagarDeudaCliente(aux);
-								JOptionPane.showMessageDialog(null, "Pago realizado");
-								CargarTable();
-							}else {
-								CargarTable();
-							}
-						}
-					});
-					buttonPane.add(btnPagarCuenta);
-				}
-				{
-					JButton btnSeleccionar_1 = new JButton("Seleccionar");
-					btnSeleccionar_1.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
-							
-						}
-					});
-					buttonPane.add(btnSeleccionar_1);
-				}
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
@@ -244,18 +220,17 @@ private void CargarTable() {
 	modelo.setRowCount(0);
 	fila = new Object[modelo.getColumnCount()];
 	
-	for (Cliente c : Controladora.getInstance().getMisClientes()) {
-		fila[0]=c.getNombre();
-		fila[1]=c.getDireccion();
-		fila[2]=c.getTelefono();
-		fila[3]=c.getTipo();
-		fila[4]=c.getIdentifiacion();
-		fila[5]=c.getCuentasPorCobrar()-Controladora.getInstance().CreditCliente(c);
+	for (Factura f : Controladora.getInstance().getMisFacturas()) {
+		fila[0]=f.getCodigo();
+		fila[1]=f.getCliente().getNombre();
+		fila[2]=f.getVendedor().getNombre();
+		fila[3]=f.getPrecioTotal();
+		fila[4]=f.getFecha();
 		modelo.addRow(fila);
 	}
 		
 	
-		//(String nombre, String direccion, String telefono, String tipo, String identificacion, float limiteCredito)
+		//String columns[] = {"Código","Cliente","Vendedor","Total","Fecha","Tipo de Pago"};
 
 }
 
@@ -266,18 +241,20 @@ public  void buscarTable(String codigo) {
 	fila = new Object[modelo.getColumnCount()];
 	
 	
-		for (Cliente c : Controladora.getInstance().getMisClientes()) {
-			
-			if(c.getIdentifiacion().equalsIgnoreCase(codigo)) {
-			fila[0]=c.getNombre();
-			fila[1]=c.getDireccion();
-			fila[2]=c.getTelefono();
-			fila[3]=c.getTipo();
-			fila[4]=c.getIdentifiacion();
-			fila[5]=c.getCuentasPorCobrar()-Controladora.getInstance().CreditCliente(c);
+	for (Factura f : Controladora.getInstance().getMisFacturas()) {
+		
+		if(f.getCodigo().equalsIgnoreCase(codigo)) {
+			fila[0]=f.getCodigo();
+			fila[1]=f.getCliente();
+			fila[2]=f.getVendedor();
+			fila[3]=f.getPrecioTotal();
+			fila[4]=f.getFecha();
+			fila[5]=f.getTipoDePago();
 			modelo.addRow(fila);
 		}
+		
 	}
+	
 	
 	
 }

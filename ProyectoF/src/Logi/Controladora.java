@@ -3,7 +3,10 @@ package Logi;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import Logi.Cliente;
+import Logi.Factura;
 
 public class Controladora implements Serializable {
 	
@@ -28,7 +31,7 @@ public class Controladora implements Serializable {
    private int cantidadProcesador;
    private int generadorCodigoOrdenes;
    private int genCodigoFactura;
-   
+   private double balance = 0;
    public static Controladora instanciaGlobal = null;
 
    
@@ -49,6 +52,16 @@ public static Controladora getInstance() {
 		instanciaGlobal= new Controladora();
 	}		
 	return instanciaGlobal;
+}
+
+
+
+public double getBalance() {
+	return balance;
+}
+
+public void setBalance(double balance) {
+	this.balance = balance;
 }
 
 public ArrayList<Combos> getMisCombos() {
@@ -482,5 +495,18 @@ public Usuario BuscarUser(String user) {
 	return usuario;
 	}
 
+public void PagarDeudaCliente(Cliente aux) {
+	double total=0;
+	ArrayList<String>s=new ArrayList<String>();
+	for(Factura f : misFacturas) {
+		if(f.getCliente().equals(aux) && f.isPagado()) {
+			s.add(f.getCodigo());
+			f.setPagado(false);
+			total+=f.calcualBenf();
+		}
+	}
+	setBalance(getBalance()+total);
+	
+}
 	
 }

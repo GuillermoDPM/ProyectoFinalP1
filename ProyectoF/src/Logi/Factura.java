@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Logi.Combos;
+import Logi.Componente;
+
 public class Factura implements Serializable {
 	
 	private static final long serialVersionUID = 5L;
@@ -95,6 +98,21 @@ public void insertarcomponentes(Componente c) {
 
 public void insertarcombos(Combos c) {
 	misCombos.add(c);
+}
+
+public float calcualBenf() {
+	float total = 0.0f;
+	
+	for(Combos C : misCombos) {
+		total += (C.calcValCombo()-C.calcPrecioTotal());
+		
+	}
+	
+	/*for(Componente comp : misComponentes) {
+		total += comp.Calbeneficio();
+	}*/
+	
+	return total;
 }
 
 }

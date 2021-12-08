@@ -29,7 +29,6 @@ public class RegisUsuario extends JDialog {
 	private JTextField txtDireccionUsuario;
 	private JTextField txtTelefono;
 	private JTextField txtLogin;
-	private JTextField txtUsername;
 	private JTextField txtPassword;
 
 	/**
@@ -67,62 +66,52 @@ public class RegisUsuario extends JDialog {
 		
 		JLabel lblNewLabel = new JLabel("Nombre:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(12, 27, 56, 16);
+		lblNewLabel.setBounds(12, 50, 56, 16);
 		panel.add(lblNewLabel);
 		
 		txtNombreUsuario = new JTextField();
-		txtNombreUsuario.setBounds(90, 24, 366, 20);
+		txtNombreUsuario.setBounds(90, 47, 366, 20);
 		panel.add(txtNombreUsuario);
 		txtNombreUsuario.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Direccion:");
+		JLabel lblNewLabel_1 = new JLabel("Direcci\u00F3n:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(12, 71, 68, 16);
+		lblNewLabel_1.setBounds(12, 116, 68, 16);
 		panel.add(lblNewLabel_1);
 		
 		txtDireccionUsuario = new JTextField();
 		txtDireccionUsuario.setColumns(10);
-		txtDireccionUsuario.setBounds(90, 67, 366, 20);
+		txtDireccionUsuario.setBounds(90, 114, 366, 20);
 		panel.add(txtDireccionUsuario);
 		
 		JLabel lblNewLabel_2 = new JLabel("Telefono:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(12, 112, 68, 16);
+		lblNewLabel_2.setBounds(12, 182, 68, 16);
 		panel.add(lblNewLabel_2);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(90, 108, 366, 20);
+		txtTelefono.setBounds(90, 181, 366, 20);
 		panel.add(txtTelefono);
 		
 		JLabel lblLogin = new JLabel("Login:");
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblLogin.setBounds(12, 152, 50, 16);
+		lblLogin.setBounds(12, 248, 50, 16);
 		panel.add(lblLogin);
 		
 		txtLogin = new JTextField();
 		txtLogin.setColumns(10);
-		txtLogin.setBounds(90, 148, 366, 20);
+		txtLogin.setBounds(90, 248, 366, 20);
 		panel.add(txtLogin);
-		
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblUsername.setBounds(12, 181, 79, 16);
-		panel.add(lblUsername);
-		
-		txtUsername = new JTextField();
-		txtUsername.setColumns(10);
-		txtUsername.setBounds(90, 177, 366, 20);
-		panel.add(txtUsername);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPassword.setBounds(12, 210, 68, 16);
+		lblPassword.setBounds(12, 314, 68, 16);
 		panel.add(lblPassword);
 		
 		txtPassword = new JTextField();
 		txtPassword.setColumns(10);
-		txtPassword.setBounds(90, 206, 366, 20);
+		txtPassword.setBounds(90, 315, 366, 20);
 		panel.add(txtPassword);
 		{
 			JPanel buttonPane = new JPanel();
@@ -142,8 +131,9 @@ public class RegisUsuario extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Usuario aux = new Usuario(txtNombreUsuario.getText(), txtDireccionUsuario.getText(), txtTelefono.getText(), txtLogin.getText(), txtUsername.getText(), txtPassword.getText());
+						Usuario aux = new Usuario(txtNombreUsuario.getText(), txtDireccionUsuario.getText(), txtTelefono.getText(), txtLogin.getText(), "", txtPassword.getText());
 						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						clear();
 					}
 				});
 				buttonPane.add(btnRegistrar);
@@ -156,16 +146,22 @@ public class RegisUsuario extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int option = JOptionPane.showConfirmDialog(null, "¿Realmente desea cancelar el registro del cliente?","Confirmar",JOptionPane.INFORMATION_MESSAGE);
-						if(JOptionPane.YES_OPTION == option) {
+						
 							dispose();
-						}
-						
-						
+
 					}
 				});
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	private void clear() {
+		
+		txtNombreUsuario.setText("");
+	    txtDireccionUsuario.setText("");
+	    txtTelefono.setText("");
+	    txtLogin.setText("");
+	    txtPassword.setText("");
 	}
 }
