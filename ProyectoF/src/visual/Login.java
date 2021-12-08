@@ -88,7 +88,7 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLUE);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -121,9 +121,16 @@ public class Login extends JFrame {
 						MenuPrincipal menu = new MenuPrincipal();
 						dispose(); 
 						menu.setVisible(true);
+						//mandarUsuario(txtUsuario.getText());
+						 //Usuario usuario = Controladora.getInstance().getMisUsuarios().get(i).getLogin().equalsIgnoreCase(txtUsuario.getText());
 					}
 					
 				}
+				
+			}
+
+			private void mandarUsuario(String usuario) {
+				
 				
 			}
 		});

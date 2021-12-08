@@ -7,6 +7,7 @@ import java.util.Date;
 
 import Logi.Cliente;
 import Logi.Factura;
+import visual.MenuPrincipal;
 
 public class Controladora implements Serializable {
 	
@@ -29,6 +30,7 @@ public class Controladora implements Serializable {
    private int cantidadDiscos;
    private int cantidadMotherboard;
    private int cantidadProcesador;
+   private int cantidadUsuarios;
    private int generadorCodigoOrdenes;
    private int genCodigoFactura;
    private double balance = 0;
@@ -224,6 +226,15 @@ public void insertarOrdenCompra(OrdenCompra ordenCompra) {
 
 public void insertarProveedor(Proveedores proveedor) {
 	misProveedores.add(proveedor);
+	setCantidadUsuarios(getCantidadProveedores() + 1);
+}
+private void setCantidadUsuarios(int i) {
+	// TODO Auto-generated method stub
+	this.cantidadUsuarios = cantidadUsuarios;
+}
+
+public void insertarUsuario(Usuario proveedor) {
+	misUsuarios.add(proveedor);
 	setCantidadProveedores(getCantidadProveedores() + 1);
 }
 
@@ -473,22 +484,24 @@ public static void setInstanciaGlobal(Controladora instanciaGlobal) {
 public ArrayList<String> NombresVendedores() {
 	ArrayList<String>nombres = new ArrayList<String>();
 	for(Usuario p : misUsuarios) {
-		if(p instanceof Usuario) {
+		if(p  instanceof Usuario) {
 			nombres.add(p.getNombre());
 		}
 	}
 	return nombres;
 }
 
-public ArrayList<String> usernameUsuario() {
-	ArrayList<String>username = new ArrayList<String>();
-	for(Usuario p : misUsuarios) {
-		if(p instanceof Usuario) {
-			username.add(p.getUsername());
-		}
+/*public String usernameUsuario() {
+	
+	/*for(int i=0; i<Controladora.getInstance().getMisUsuarios().size(); i++) {
+	if(Controladora.getInstance().getMisUsuarios().get(i).getLogin().equals(txtUsuario.getText()) && Controladora.getInstance().getMisUsuarios().get(i).getPassword().equals(pass)) {
+		
+		
+
 	}
-	return username;
+	
 }
+}*/
 
 public Usuario BuscarUser(String user) {
 	Usuario usuario = null;
@@ -503,6 +516,9 @@ public Usuario BuscarUser(String user) {
 		i++;
 	}
 	return usuario;
+	
+	
+	
 	}
 
 public void PagarDeudaCliente(Cliente aux) {

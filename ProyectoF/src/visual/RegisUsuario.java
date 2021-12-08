@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import Logi.Controladora;
 import Logi.Usuario;
 
 import javax.swing.JLabel;
@@ -144,6 +145,7 @@ public class RegisUsuario extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Usuario aux = new Usuario(txtNombreUsuario.getText(), txtDireccionUsuario.getText(), txtTelefono.getText(), txtLogin.getText(), cbxPuesto.getSelectedItem().toString(), txtPassword.getText());
+						Controladora.getInstance().insertarUsuario(aux);
 						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 						clear();
 					}

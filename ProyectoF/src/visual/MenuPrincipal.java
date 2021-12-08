@@ -24,9 +24,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
+
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
@@ -108,32 +110,11 @@ public class MenuPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnOrdenCompra = new JMenu("Orden de Compra");
-		menuBar.add(mnOrdenCompra);
-		
-		JMenu mnAdministrador = new JMenu("Administrador");
-		menuBar.add(mnAdministrador);
-		
-		JMenu mnFacturacion = new JMenu("Facturaci\u00F3n");
-		menuBar.add(mnFacturacion);
-		
-		JMenu mnComponentes = new JMenu("Componentes");
-		menuBar.add(mnComponentes);
-		
-		JMenu mnCombos = new JMenu("Combos");
-		menuBar.add(mnCombos);
-		
-		JMenu mnClientes = new JMenu("Clientes");
-		menuBar.add(mnClientes);
-		
-		JMenu mnProveedores = new JMenu("Proveedores");
-		menuBar.add(mnProveedores);
-		
-		JMenu mnRespaldo = new JMenu("Respaldo");
-		menuBar.add(mnRespaldo);
+		JMenu mnFacturacion_1 = new JMenu("Facturaci\u00F3n");
+		menuBar.add(mnFacturacion_1);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturar");
-		mnFacturacion.add(mntmNewMenuItem_1);
+		mnFacturacion_1.add(mntmNewMenuItem_1);
 		
 		
 		
@@ -145,7 +126,7 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
-		mnFacturacion.add(mntmNewMenuItem_14);
+		mnFacturacion_1.add(mntmNewMenuItem_14);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -154,6 +135,39 @@ public class MenuPrincipal extends JFrame {
 				facturacion.setVisible(true);	
 			}
 		});
+		
+		JMenu mnComponentes = new JMenu("Componentes");
+		menuBar.add(mnComponentes);
+		
+		JMenu mnClientes_1 = new JMenu("Clientes");
+		menuBar.add(mnClientes_1);
+		
+		
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar Clientes");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegisCliente regCliente = new RegisCliente();
+				regCliente.setVisible(true);
+			}
+		});
+		mnClientes_1.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Clientes");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaCliente listClientes = new ListaCliente();
+				listClientes.setVisible(true);
+			}
+		});
+		mnClientes_1.add(mntmNewMenuItem_12);
+		
+		JMenu mnCombos = new JMenu("Combos");
+		menuBar.add(mnCombos);
+		
+		JMenu mnProveedores = new JMenu("Proveedores");
+		menuBar.add(mnProveedores);
 		
 		
 		
@@ -188,33 +202,62 @@ public class MenuPrincipal extends JFrame {
 		mnCombos.add(mntmNewMenuItem_13);
 		
 		
-		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar Clientes");
-		mntmNewMenuItem_11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				RegisCliente regCliente = new RegisCliente();
-				regCliente.setVisible(true);
-			}
-		});
-		mnClientes.add(mntmNewMenuItem_11);
-		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Clientes");
-		mntmNewMenuItem_12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListaCliente listClientes = new ListaCliente();
-				listClientes.setVisible(true);
-			}
-		});
-		mnClientes.add(mntmNewMenuItem_12);
-		
-		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Proveedores");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				RegisProveedor verOrdenCompra = new RegisProveedor();
+				verOrdenCompra.setVisible(true);
+			}
+		});
 		mnProveedores.add(mntmNewMenuItem);
 		
+		JMenu mnOrdenCompra_1 = new JMenu("Orden de Compra");
+		menuBar.add(mnOrdenCompra_1);
 		
 		
-		mnRespaldo.addActionListener(new ActionListener() {
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				OrdenCompra verOrdenCompra = new OrdenCompra();
+				verOrdenCompra.setVisible(true);
+			}
+		});
+		mnOrdenCompra_1.add(mntmNewMenuItem_2);
+		
+		JMenu mnAdministrador_1 = new JMenu("Administrador");
+		menuBar.add(mnAdministrador_1);
+		
+		
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Usuario");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegisUsuario regUsuario = new RegisUsuario();
+				regUsuario.setVisible(true);
+			}
+		});
+		mnAdministrador_1.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Lista de Usuarios");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ListaUsuario regUsuario = new ListaUsuario();
+				regUsuario.setVisible(true);
+				
+			}
+		});
+		mnAdministrador_1.add(mntmNewMenuItem_3);
+		
+		JMenu mnRespaldo_1 = new JMenu("Respaldo");
+		menuBar.add(mnRespaldo_1);
+		
+		
+		
+		mnRespaldo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
@@ -239,39 +282,20 @@ public class MenuPrincipal extends JFrame {
 				}
 			}
 		});
-		mnRespaldo.add(mntmNewMenuItem_8);
-		
-		
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				OrdenCompra verOrdenCompra = new OrdenCompra();
-				verOrdenCompra.setVisible(true);
-			}
-		});
-		mnOrdenCompra.add(mntmNewMenuItem_2);
-		
-		
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Usuario");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegisUsuario regUsuario = new RegisUsuario();
-				regUsuario.setVisible(true);
-			}
-		});
-		mnAdministrador.add(mntmNewMenuItem_5);
+		mnRespaldo_1.add(mntmNewMenuItem_8);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-	
+		CargarMenu();
 	}
 	public void CargarMenu() {
-		if(Controladora.getInstance().usernameUsuario().equals("Vendedor")) {
+		
+		
+		
+		
+		if(Controladora.getInstance().NombresVendedores().toArray().equals("Vendedor")) {
 			mnFacturacion.setEnabled(true);
 			mnComponentes.setEnabled(true);
 			mnClientes.setEnabled(true);
@@ -283,7 +307,7 @@ public class MenuPrincipal extends JFrame {
 			mnAdministrador.setEnabled(false);
 		}
 		
-		if(Controladora.getInstance().usernameUsuario().equals("Administrador")) {
+		if(Controladora.getInstance().NombresVendedores().toArray().equals("Administrador")) {
 			mnFacturacion.setEnabled(true);
 			mnComponentes.setEnabled(true);
 			mnClientes.setEnabled(true);

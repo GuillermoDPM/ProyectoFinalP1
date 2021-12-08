@@ -39,7 +39,7 @@ public class Server{
 	    				 System.out.println("ESRIBE ALGO");
 	        Socket nsfd = sfd.accept();
 	        leer = new ObjectInputStream(nsfd.getInputStream());
-	        archivoResp = new FileOutputStream("Respaldo/archivoDeRespZinio.dat");
+	        archivoResp = new FileOutputStream("respaldo/archivoDeRespZinio.dat");
 	        System.out.println("Conexion aceptada de: "+nsfd.getInetAddress());
 	       
 	        guardar = new ObjectOutputStream(archivoResp);
