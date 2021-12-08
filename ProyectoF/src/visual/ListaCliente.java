@@ -56,7 +56,6 @@ public class ListaCliente extends JDialog {
 	private int seleccion = -1;
 	private Combos c = null;
 	private Combos cargaCombos = null;
-	private static Cliente aux = null;
 	private int mode=-1;
 	private int boton = 1;
 	private JButton btnSeleccionar;
@@ -129,8 +128,8 @@ public class ListaCliente extends JDialog {
 					seleccion = table.getSelectedRow();
 					modelrow = table.convertRowIndexToModel(seleccion);
 					
-					/*
-								if(seleccion!=-1){
+					
+							/*	if(seleccion!=-1){
 									btnSeleccionar.setEnabled(true);
 									btnCrear.setEnabled(false);
 									btnPagar.setEnabled(true);
@@ -162,7 +161,7 @@ public class ListaCliente extends JDialog {
 							CargarTable();
 							buscarTable(txtBuscar.getText());
 							
-							/*if(boton==1) {
+							if(boton==1) {
 								boton=0;
 								txtBuscar.setVisible(true);
 								btnBuscar.setText("");
@@ -173,7 +172,7 @@ public class ListaCliente extends JDialog {
 								txtBuscar.setVisible(false);
 								txtBuscar.setText("");
 								btnBuscar.setText("Buscar");
-							}*/
+							}
 							
 							
 						}
@@ -208,28 +207,25 @@ public class ListaCliente extends JDialog {
 					JButton btnPagarCuenta = new JButton("Pagar Cuenta");
 					btnPagarCuenta.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							
-							int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");
-							if(opcion==JOptionPane.OK_OPTION) {
-								Controladora.getInstance().PagarDeudaCliente(aux);
-								JOptionPane.showMessageDialog(null, "Pago realizado");
-								CargarTable();
+								float aux1 = (Float) modelo.getValueAt(table.getSelectedRow(), 5);
+							    Cliente aux = Controladora.getInstance().buscarCliente(modelo.getValueAt(table.getSelectedRow(), 4).toString());
+							if(aux1 >= aux.getLimiteCredito()) {
+								JOptionPane.showMessageDialog(null, "El cliente seleccionado no tiene deudas pendientes", "Información", JOptionPane.ERROR_MESSAGE);
+
 							}else {
-								CargarTable();
+								int opcion = JOptionPane.showConfirmDialog(null, "Seguro que desea realizar el pago total de sus facturas");
+								if(opcion==JOptionPane.OK_OPTION) {
+									Controladora.getInstance().PagarDeudaCliente(aux);
+									JOptionPane.showMessageDialog(null, "Pago realizado");
+									CargarTable();
+								}else {
+									CargarTable();
+								}
 							}
+							
 						}
 					});
 					buttonPane.add(btnPagarCuenta);
-				}
-				{
-					JButton btnSeleccionar_1 = new JButton("Seleccionar");
-					btnSeleccionar_1.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
-							
-						}
-					});
-					buttonPane.add(btnSeleccionar_1);
 				}
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
@@ -250,7 +246,7 @@ private void CargarTable() {
 		fila[2]=c.getTelefono();
 		fila[3]=c.getTipo();
 		fila[4]=c.getIdentifiacion();
-		fila[5]=c.getCuentasPorCobrar()-Controladora.getInstance().CreditCliente(c);
+		fila[5]=Controladora.getInstance().CreditCliente(c);
 		modelo.addRow(fila);
 	}
 		
@@ -274,7 +270,7 @@ public  void buscarTable(String codigo) {
 			fila[2]=c.getTelefono();
 			fila[3]=c.getTipo();
 			fila[4]=c.getIdentifiacion();
-			fila[5]=c.getCuentasPorCobrar()-Controladora.getInstance().CreditCliente(c);
+			fila[5]=Controladora.getInstance().CreditCliente(c);
 			modelo.addRow(fila);
 		}
 	}

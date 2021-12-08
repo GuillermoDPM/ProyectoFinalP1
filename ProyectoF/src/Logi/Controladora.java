@@ -496,16 +496,16 @@ public Usuario BuscarUser(String user) {
 	}
 
 public void PagarDeudaCliente(Cliente aux) {
-	double total=0;
+	float total=0;
 	ArrayList<String>s=new ArrayList<String>();
 	for(Factura f : misFacturas) {
-		if(f.getCliente().equals(aux) && f.isPagado()) {
+		if(f.getCliente().equals(aux) && !f.isPagado()) {
 			s.add(f.getCodigo());
-			f.setPagado(false);
-			total+=f.calcualBenf();
+			f.setPagado(true);
+			total = aux.getLimiteCredito();
 		}
 	}
-	setBalance(getBalance()+total);
+	aux.setLimiteCredito(total);
 	
 }
 	

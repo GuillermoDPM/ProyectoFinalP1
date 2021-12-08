@@ -437,20 +437,28 @@ public class Facturacion extends JDialog {
 	private void decrementar() {
 		Factura factura = Controladora.getInstance().buscarFactura(txtFacturaNumero.getText());
 		for (Componente c : componentesTabla) {
-			for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
-				if(c.getCodigoComponente().equalsIgnoreCase(factura.getMisComponentes().get(i).getCodigoComponente())) {
-					c.setCantidadDisponible(c.getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString())));
+			for(int i=0;i<=componentesTabla.size();i++) {
+				try {
+					if(c.getCodigoComponente().equalsIgnoreCase(factura.getMisComponentes().get(i).getCodigoComponente())) {
+						c.setCantidadDisponible(c.getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString())));
+					}
+				}
+				 catch (Exception e) {
+					
+				}
+		}}
+				
+		try {
+			for(Combos c: combosTabla) {
+				for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
+					if(c.getMisComponentes().get(i).getCodigoComponente().equalsIgnoreCase(factura.getMisCombos().get(i).getMisComponentes().get(i).getCodigoComponente())) {
+						c.getMisComponentes().get(i).setCantidadDisponible((c.getMisComponentes().get(i).getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString()))));
+					}
 				}
 			}
+		} catch (Exception e) {
 		}
 		
-		for(Combos c: combosTabla) {
-			for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
-				if(c.getCodigo().equalsIgnoreCase(factura.getMisCombos().get(i).getCodigo())) {
-					c.getMisComponentes().get(i).setCantidadDisponible((c.getMisComponentes().get(i).getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString()))));
-				}
-			}
-		}
 		
 	}
 	

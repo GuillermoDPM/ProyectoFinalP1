@@ -95,11 +95,11 @@ public class Login extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(197, 60, 66, 15);
+		lblUsuario.setBounds(185, 61, 66, 15);
 		contentPane.add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setBounds(185, 143, 91, 15);
+		lblContrasea.setBounds(174, 143, 91, 15);
 		contentPane.add(lblContrasea);
 		
 		txtUsuario = new JTextField();
