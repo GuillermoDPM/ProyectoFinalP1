@@ -180,7 +180,7 @@ public class RegistrarComponentes extends JFrame {
 					btnRefrescar.setEnabled(true);
 					txtCodigo.setText(aux.getCodigoComponente());
 					txtSerial.setText(aux.getSerial());
-				//	txtProveedorComponentes.setText(aux.getProveedor().getrnc());
+				    txtProveedorComponentes.setText(aux.getProveedor().getrnc());
 					spnPrecio.setValue(aux.getPrecio());
 					spnCantidadMinima.setValue(aux.getCantidadMinima());
 					spnCantidadReal.setValue(aux.getCantidadDisponible());
