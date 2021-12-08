@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
@@ -195,7 +197,32 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_4.add(mntmNewMenuItem_7);
 		
 		JMenu mnNewMenu_5 = new JMenu("Respaldo");
+		mnNewMenu_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		menuBar.add(mnNewMenu_5);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Guardar Respaldo");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Socket elSocket = new Socket("127.0.0.1",7000);
+				System.out.println("ABRE PORFA");
+					ObjectOutputStream elklk = new ObjectOutputStream(elSocket.getOutputStream());
+					elklk.writeObject(Controladora.getInstance());
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_5.add(mntmNewMenuItem_8);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
