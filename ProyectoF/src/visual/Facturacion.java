@@ -205,14 +205,15 @@ public class Facturacion extends JDialog {
 					row[0] = aux.getCodigoComponente();
 					row[1] = spnCantidadArticulos.getValue().toString();
 					row[2] = aux.getPrecio();
+					model.addRow(row);
 					componentesTabla.add(aux);
 			    }else if(aux1!=null) {
-			    	row[0] = aux1.getCodigo();
-					row[1] = spnCantidadArticulos.getValue().toString();
-					row[2] = aux1.getPrecioCombo();
-					combosTabla.add(aux1);
+							row[0] = aux1.getCodigo();
+							row[1]= spnCantidadArticulos.getValue().toString();
+							row[2] = aux1.getPrecioCombo();
+							model.addRow(row);
+			    	combosTabla.add(aux1);
 			    }
-				model.addRow(row);
 				CalcularPrecio();
 		}
 
@@ -439,6 +440,14 @@ public class Facturacion extends JDialog {
 			for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
 				if(c.getCodigoComponente().equalsIgnoreCase(factura.getMisComponentes().get(i).getCodigoComponente())) {
 					c.setCantidadDisponible(c.getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString())));
+				}
+			}
+		}
+		
+		for(Combos c: combosTabla) {
+			for(int i=0;i<Controladora.getInstance().getMisComponentes().size();i++) {
+				if(c.getCodigo().equalsIgnoreCase(factura.getMisCombos().get(i).getCodigo())) {
+					c.getMisComponentes().get(i).setCantidadDisponible((c.getMisComponentes().get(i).getCantidadDisponible()-(Integer.valueOf(model.getValueAt(i, 1).toString()))));
 				}
 			}
 		}
