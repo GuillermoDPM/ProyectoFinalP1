@@ -30,6 +30,16 @@ import java.io.ObjectInputStream;
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	
+	private JMenu mnComponentes;
+	private JMenu mnFacturacion;
+	private JMenu mnClientes;
+	private JMenu mnCombos;
+	private JMenu mnProveedores;
+	private JMenu mnAdministrador;
+	private JMenu mnRespaldo;
+	private JMenu mnOrdenCompra;
+	
 
 	/**
 	 * Launch the application.
@@ -52,7 +62,8 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public MenuPrincipal() {
 		
-		 
+		
+	
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -82,25 +93,8 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		/*addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				FileOutputStream empresa2;
-				ObjectOutputStream empresaWrite;
-				try {
-					empresa2 = new  FileOutputStream("empresa.dat");
-					empresaWrite = new ObjectOutputStream(empresa2);
-					empresaWrite.writeObject(Control.getInstance());
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}
-		});*/
+		
+		
 		
 		setTitle("Zinio Computer");
 		setResizable(false);
@@ -114,45 +108,34 @@ public class MenuPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Registro");
-		menuBar.add(mnNewMenu);
+		JMenu mnOrdenCompra = new JMenu("Orden de Compra");
+		menuBar.add(mnOrdenCompra);
 		
+		JMenu mnAdministrador = new JMenu("Administrador");
+		menuBar.add(mnAdministrador);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Cliente");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegisCliente regCliente = new RegisCliente();
-				regCliente.setVisible(true);
-			}
-		});
+		JMenu mnFacturacion = new JMenu("Facturaci\u00F3n");
+		menuBar.add(mnFacturacion);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Componentes");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					RegistrarComponentes regComponentes = new RegistrarComponentes();
-					regComponentes.setVisible(true);
-				
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
-		mnNewMenu.add(mntmNewMenuItem_4);
+		JMenu mnComponentes = new JMenu("Componentes");
+		menuBar.add(mnComponentes);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Combos");
-		mnNewMenu.add(mntmNewMenuItem_3);
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				RegCombos regcombos = new RegCombos();
-				regcombos.setVisible(true);
-			}
-		});
+		JMenu mnCombos = new JMenu("Combos");
+		menuBar.add(mnCombos);
 		
-		JMenu mnNewMenu_3 = new JMenu("Facturaci\u00F3n");
-		menuBar.add(mnNewMenu_3);
+		JMenu mnClientes = new JMenu("Clientes");
+		menuBar.add(mnClientes);
+		
+		JMenu mnProveedores = new JMenu("Proveedores");
+		menuBar.add(mnProveedores);
+		
+		JMenu mnRespaldo = new JMenu("Respaldo");
+		menuBar.add(mnRespaldo);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturar");
-		mnNewMenu_3.add(mntmNewMenuItem_1);
+		mnFacturacion.add(mntmNewMenuItem_1);
+		
+		
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Lista de Facturas");
 		mntmNewMenuItem_14.addActionListener(new ActionListener() {
@@ -162,7 +145,7 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_14);
+		mnFacturacion.add(mntmNewMenuItem_14);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -172,54 +155,71 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		JMenu mnNewMenu_1 = new JMenu("Orden de Compra");
-		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar componentes");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				OrdenCompra verOrdenCompra = new OrdenCompra();
-				verOrdenCompra.setVisible(true);
+				RegistrarComponentes regComponentes = new RegistrarComponentes();
+				regComponentes.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_2);
+		mnComponentes.add(mntmNewMenuItem_9);
 		
-		JMenu mnNewMenu_2 = new JMenu("Administrador");
-		menuBar.add(mnNewMenu_2);
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Usuario");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegisUsuario regUsuario = new RegisUsuario();
-				regUsuario.setVisible(true);
-			}
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_5);
-		
-		JMenu mnNewMenu_4 = new JMenu("Listas");
-		menuBar.add(mnNewMenu_4);
-		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Lista de Componentes");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Lista de Componentes");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				ListaComponentes regComponentes = new ListaComponentes();
 				regComponentes.setVisible(true);
 			}
 		});
-		mnNewMenu_4.add(mntmNewMenuItem_6);
+		mnComponentes.add(mntmNewMenuItem_10);
 		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Clientes");
-		mnNewMenu_4.add(mntmNewMenuItem_7);
 		
-		JMenu mnNewMenu_5 = new JMenu("Respaldo");
-		mnNewMenu_5.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Registrar Combos");
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegCombos regcombos = new RegCombos();
+				regcombos.setVisible(true);
+			}
+		});
+		mnCombos.add(mntmNewMenuItem_13);
+		
+		
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar Clientes");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegisCliente regCliente = new RegisCliente();
+				regCliente.setVisible(true);
+			}
+		});
+		mnClientes.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Clientes");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaCliente listClientes = new ListaCliente();
+				listClientes.setVisible(true);
+			}
+		});
+		mnClientes.add(mntmNewMenuItem_12);
+		
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Proveedores");
+		mnProveedores.add(mntmNewMenuItem);
+		
+		
+		
+		mnRespaldo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		menuBar.add(mnNewMenu_5);
+		
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Guardar Respaldo");
 		mntmNewMenuItem_8.addActionListener(new ActionListener() {
@@ -239,67 +239,63 @@ public class MenuPrincipal extends JFrame {
 				}
 			}
 		});
-		mnNewMenu_5.add(mntmNewMenuItem_8);
+		mnRespaldo.add(mntmNewMenuItem_8);
 		
-		JMenu mnNewMenu_6 = new JMenu("Componentes");
-		menuBar.add(mnNewMenu_6);
 		
-		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar componentes");
-		mntmNewMenuItem_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistrarComponentes regComponentes = new RegistrarComponentes();
-				regComponentes.setVisible(true);
-			}
-		});
-		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
-		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Lista de Componentes");
-		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ListaComponentes regComponentes = new ListaComponentes();
-				regComponentes.setVisible(true);
+				OrdenCompra verOrdenCompra = new OrdenCompra();
+				verOrdenCompra.setVisible(true);
 			}
 		});
-		mnNewMenu_6.add(mntmNewMenuItem_10);
+		mnOrdenCompra.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu_7 = new JMenu("Clientes");
-		menuBar.add(mnNewMenu_7);
 		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar Clientes");
-		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Usuario");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				RegisCliente regCliente = new RegisCliente();
-				regCliente.setVisible(true);
+				RegisUsuario regUsuario = new RegisUsuario();
+				regUsuario.setVisible(true);
 			}
 		});
-		mnNewMenu_7.add(mntmNewMenuItem_11);
-		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Clientes");
-		mntmNewMenuItem_12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListaCliente listClientes = new ListaCliente();
-				listClientes.setVisible(true);
-			}
-		});
-		mnNewMenu_7.add(mntmNewMenuItem_12);
-		
-		JMenu mnNewMenu_8 = new JMenu("Combos");
-		menuBar.add(mnNewMenu_8);
-		
-		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Registrar Combos");
-		mntmNewMenuItem_13.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				RegCombos regcombos = new RegCombos();
-				regcombos.setVisible(true);
-			}
-		});
-		mnNewMenu_8.add(mntmNewMenuItem_13);
+		mnAdministrador.add(mntmNewMenuItem_5);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+	
 	}
+	public void CargarMenu() {
+		if(Controladora.getInstance().usernameUsuario().equals("Vendedor")) {
+			mnFacturacion.setEnabled(true);
+			mnComponentes.setEnabled(true);
+			mnClientes.setEnabled(true);
+			mnCombos.setEnabled(true);
+			mnProveedores.setEnabled(true);
+			
+			mnRespaldo.setEnabled(true);
+			mnOrdenCompra.setEnabled(false);
+			mnAdministrador.setEnabled(false);
+		}
+		
+		if(Controladora.getInstance().usernameUsuario().equals("Administrador")) {
+			mnFacturacion.setEnabled(true);
+			mnComponentes.setEnabled(true);
+			mnClientes.setEnabled(true);
+			mnCombos.setEnabled(true);
+			mnProveedores.setEnabled(true);
+			
+			mnRespaldo.setEnabled(true);
+			mnOrdenCompra.setEnabled(true);
+			mnAdministrador.setEnabled(true);
+			
+		}
+		
+	}
+	
 }

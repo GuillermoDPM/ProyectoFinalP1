@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegisUsuario extends JDialog {
 
@@ -113,6 +115,16 @@ public class RegisUsuario extends JDialog {
 		txtPassword.setColumns(10);
 		txtPassword.setBounds(90, 315, 366, 20);
 		panel.add(txtPassword);
+		
+		JLabel lblPuesto = new JLabel("Puesto:");
+		lblPuesto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPuesto.setBounds(12, 356, 68, 16);
+		panel.add(lblPuesto);
+		
+		JComboBox cbxPuesto = new JComboBox();
+		cbxPuesto.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "Vendedor", "Administrador"}));
+		cbxPuesto.setBounds(90, 356, 366, 20);
+		panel.add(cbxPuesto);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -131,7 +143,7 @@ public class RegisUsuario extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Usuario aux = new Usuario(txtNombreUsuario.getText(), txtDireccionUsuario.getText(), txtTelefono.getText(), txtLogin.getText(), "", txtPassword.getText());
+						Usuario aux = new Usuario(txtNombreUsuario.getText(), txtDireccionUsuario.getText(), txtTelefono.getText(), txtLogin.getText(), cbxPuesto.getSelectedItem().toString(), txtPassword.getText());
 						JOptionPane.showMessageDialog(null, "Registro Satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 						clear();
 					}

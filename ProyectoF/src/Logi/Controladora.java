@@ -480,6 +480,16 @@ public ArrayList<String> NombresVendedores() {
 	return nombres;
 }
 
+public ArrayList<String> usernameUsuario() {
+	ArrayList<String>username = new ArrayList<String>();
+	for(Usuario p : misUsuarios) {
+		if(p instanceof Usuario) {
+			username.add(p.getUsername());
+		}
+	}
+	return username;
+}
+
 public Usuario BuscarUser(String user) {
 	Usuario usuario = null;
 	boolean encontrado = false;
