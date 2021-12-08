@@ -65,7 +65,7 @@ public float calcValCombo() {
 	return combo;
 }
 
- private float calcPrecioTotal() {
+ public float calcPrecioTotal() {
 	float total = 0;
 	for (Componente componente : misComponentes) {
 		if (componente != null) {

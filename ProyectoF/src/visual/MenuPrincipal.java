@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
@@ -151,6 +153,16 @@ public class MenuPrincipal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Facturar");
 		mnNewMenu_3.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Lista de Facturas");
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaFactura lisfacturacion = new ListaFactura();
+				lisfacturacion.setVisible(true);	
+				
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_14);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -164,6 +176,13 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Orden Compra");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				OrdenCompra verOrdenCompra = new OrdenCompra();
+				verOrdenCompra.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenu mnNewMenu_2 = new JMenu("Administrador");
@@ -193,6 +212,91 @@ public class MenuPrincipal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Clientes");
 		mnNewMenu_4.add(mntmNewMenuItem_7);
+		
+		JMenu mnNewMenu_5 = new JMenu("Respaldo");
+		mnNewMenu_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		menuBar.add(mnNewMenu_5);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Guardar Respaldo");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Socket elSocket = new Socket("127.0.0.1",7000);
+				System.out.println("ABRE PORFA");
+					ObjectOutputStream elklk = new ObjectOutputStream(elSocket.getOutputStream());
+					elklk.writeObject(Controladora.getInstance());
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_5.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_6 = new JMenu("Componentes");
+		menuBar.add(mnNewMenu_6);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Registrar componentes");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarComponentes regComponentes = new RegistrarComponentes();
+				regComponentes.setVisible(true);
+			}
+		});
+		mnNewMenu_6.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Lista de Componentes");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListaComponentes regComponentes = new ListaComponentes();
+				regComponentes.setVisible(true);
+			}
+		});
+		mnNewMenu_6.add(mntmNewMenuItem_10);
+		
+		JMenu mnNewMenu_7 = new JMenu("Clientes");
+		menuBar.add(mnNewMenu_7);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Registrar Clientes");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegisCliente regCliente = new RegisCliente();
+				regCliente.setVisible(true);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Lista de Clientes");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaCliente listClientes = new ListaCliente();
+				listClientes.setVisible(true);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_12);
+		
+		JMenu mnNewMenu_8 = new JMenu("Combos");
+		menuBar.add(mnNewMenu_8);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Registrar Combos");
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegCombos regcombos = new RegCombos();
+				regcombos.setVisible(true);
+			}
+		});
+		mnNewMenu_8.add(mntmNewMenuItem_13);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
